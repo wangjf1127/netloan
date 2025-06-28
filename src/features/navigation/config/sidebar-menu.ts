@@ -1,0 +1,128 @@
+import type { MenuItem } from "@/features/case-management/types"
+
+export const sidebarMenuItems: MenuItem[] = [
+  {
+    id: "risk-control",
+    label: "全流程风险掌控",
+    icon: "Shield",
+    path: "/risk-control",
+    children: [
+      {
+        id: "pre-loan",
+        label: "贷前管理",
+        icon: "FileSearch",
+        path: "/risk-control/pre-loan",
+        children: [
+          {
+            id: "credit-approval",
+            label: "授信审批",
+            icon: "CheckCircle",
+            path: "/risk-control/pre-loan/credit-approval",
+          },
+        ],
+      },
+      {
+        id: "during-loan",
+        label: "贷中管理",
+        icon: "FileText",
+        path: "/risk-control/during-loan",
+        children: [
+          {
+            id: "loan-approval",
+            label: "贷款审批",
+            icon: "FileCheck",
+            path: "/risk-control/during-loan/loan-approval",
+          },
+        ],
+      },
+      {
+        id: "post-loan",
+        label: "贷后管理",
+        icon: "FileX",
+        path: "/risk-control/post-loan",
+        children: [
+          {
+            id: "collection-management",
+            label: "催收管理",
+            icon: "Phone",
+            path: "/risk-control/post-loan/collection-management",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "customer-management",
+    label: "客户管理",
+    icon: "Users",
+    path: "/customers",
+  },
+  {
+    id: "case-management",
+    label: "案件管理",
+    icon: "FileText",
+    path: "/cases",
+    children: [
+      {
+        id: "case-list",
+        label: "案件列表",
+        icon: "List",
+        path: "/", // 指向首页，与案件列表相同
+      },
+    ],
+  },
+  {
+    id: "image-management",
+    label: "影像件管理",
+    icon: "Image",
+    path: "/image-management",
+    children: [
+      {
+        id: "image-monitoring",
+        label: "影像监测查询",
+        icon: "Search",
+        path: "/image-management/monitoring",
+      },
+    ],
+  },
+  {
+    id: "approval-center",
+    label: "审批中心",
+    icon: "ClipboardCheck",
+    path: "/approval-center",
+    children: [
+      {
+        id: "approval-list",
+        label: "审批列表",
+        icon: "List",
+        path: "/approval-center/list",
+      },
+    ],
+  },
+  {
+    id: "due-diligence",
+    label: "尽调管理",
+    icon: "FileSearch2",
+    path: "/due-diligence",
+  },
+  {
+    id: "identity-record",
+    label: "实名记录",
+    icon: "UserCheck",
+    path: "/identity-record",
+  },
+  {
+    id: "credit-management",
+    label: "额度管理",
+    icon: "CreditCard",
+    path: "/credit-management",
+    children: [
+      {
+        id: "credit-ledger",
+        label: "额度台账",
+        icon: "FileSpreadsheet",
+        path: "/credit-management/ledger",
+      },
+    ],
+  },
+]
