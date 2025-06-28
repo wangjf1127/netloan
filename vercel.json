@@ -47,10 +47,6 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/((?!api|_next|_static|favicon.ico).*)",
-      "destination": "/"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
