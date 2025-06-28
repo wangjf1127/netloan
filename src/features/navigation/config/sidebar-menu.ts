@@ -125,4 +125,24 @@ export const sidebarMenuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    id: "business-query",
+    label: "业务查询",
+    icon: "Search",
+    path: "/business-query",
+    children: [
+      {
+        id: "credit-application",
+        label: "授信申请",
+        icon: "FileText",
+        path: "/business-query/credit-application",
+      },
+      {
+        id: "credit-agreement",
+        label: "授信协议",
+        icon: "FileCheck",
+        path: "/business-query/credit-agreement",
+      },
+    ],
+  },
 ]

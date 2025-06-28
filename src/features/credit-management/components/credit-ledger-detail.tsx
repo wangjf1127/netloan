@@ -4,14 +4,30 @@ import { useState, useEffect } from "react"
 import { Button } from "@/shared/components/ui/button"
 import { Input } from "@/shared/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select"
-import { ArrowLeft, Menu, Search, RotateCcw, Eye } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { ArrowLeft, Menu, Search, RotateCcw, Eye, X } from "lucide-react"
 import Link from "next/link"
 import type { CreditLedgerDetailProps } from "../types"
 import { useCreditLedgerDetail } from "../hooks/use-credit-ledger"
 
+// 提现信息类型定义
+interface WithdrawalInfo {
+  businessNumber: string
+  transactionAmount: string
+  customerId: string
+  transactionType: string
+  processingResult: string
+  institution: string
+  transactionDate: string
+  productNumber: string
+  receiptNumber: string
+}
+
 export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
   const [isInitialLoading, setIsInitialLoading] = useState(true)
   const [activeTab, setActiveTab] = useState("basic")
+  const [isWithdrawalDialogOpen, setIsWithdrawalDialogOpen] = useState(false)
+  const [selectedWithdrawal, setSelectedWithdrawal] = useState<WithdrawalInfo | null>(null)
 
   const { data: creditDetail, isLoading, error } = useCreditLedgerDetail(creditId)
 
@@ -36,6 +52,25 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
   // 格式化利率
   const formatRate = (rate: number) => {
     return `${rate.toFixed(2)}%`
+  }
+
+  // 处理查看提现信息
+  const handleViewWithdrawal = (transactionData: any) => {
+    // 根据图片内容创建提现信息数据
+    const withdrawalInfo: WithdrawalInfo = {
+      businessNumber: "202904293671779408114476640",
+      transactionAmount: "10.00",
+      customerId: "264997",
+      transactionType: "提现",
+      processingResult: "正常",
+      institution: "上海农村商业银行",
+      transactionDate: "2029-04-29",
+      productNumber: "PROD0000004500022",
+      receiptNumber: "9990000033671779408280092672000"
+    }
+
+    setSelectedWithdrawal(withdrawalInfo)
+    setIsWithdrawalDialogOpen(true)
   }
 
   if (isInitialLoading || isLoading) {
@@ -373,6 +408,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                          onClick={() => handleViewWithdrawal({})}
                         >
                           <Eye className="h-3 w-3 mr-1" />
                           查看
@@ -398,6 +434,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                          onClick={() => handleViewWithdrawal({})}
                         >
                           <Eye className="h-3 w-3 mr-1" />
                           查看
@@ -423,6 +460,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                          onClick={() => handleViewWithdrawal({})}
                         >
                           <Eye className="h-3 w-3 mr-1" />
                           查看
@@ -448,6 +486,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                       variant="ghost"
                       size="sm"
                       className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-1 h-auto text-xs sm:text-sm"
+                      onClick={() => handleViewWithdrawal({})}
                     >
                       <Eye className="h-3 w-3 mr-1" />
                       查看
@@ -490,6 +529,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                       variant="ghost"
                       size="sm"
                       className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                      onClick={() => handleViewWithdrawal({})}
                     >
                       <Eye className="h-3 w-3 mr-1" />
                       查看
@@ -532,6 +572,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                       variant="ghost"
                       size="sm"
                       className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                      onClick={() => handleViewWithdrawal({})}
                     >
                       <Eye className="h-3 w-3 mr-1" />
                       查看
@@ -575,6 +616,83 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
           )}
         </div>
       </div>
+
+      {/* 提现信息弹窗 */}
+      <Dialog open={isWithdrawalDialogOpen} onOpenChange={setIsWithdrawalDialogOpen}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-medium mb-4">提现信息</DialogTitle>
+          </DialogHeader>
+
+          {selectedWithdrawal && (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-3 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">业务编号:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.businessNumber}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">借据号:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.receiptNumber}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">交易金额:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.transactionAmount}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">客户ID:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.customerId}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">交易类型:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.transactionType}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">处理结果:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.processingResult}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">机构:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.institution}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">交易日期:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.transactionDate}</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">产品编号:</span>
+                  <span className="text-gray-900 font-medium">{selectedWithdrawal.productNumber}</span>
+                </div>
+              </div>
+
+              <div className="flex justify-center pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsWithdrawalDialogOpen(false)}
+                  className="px-8"
+                >
+                  确定
+                </Button>
+              </div>
+            </div>
+          )}
+
+          <button
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            onClick={() => setIsWithdrawalDialogOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

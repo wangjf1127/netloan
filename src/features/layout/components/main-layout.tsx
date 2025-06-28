@@ -5,7 +5,7 @@ import { Button } from "@/shared/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { Sidebar } from "@/features/navigation/components/sidebar"
 import { sidebarMenuItems } from "@/features/navigation/config/sidebar-menu"
-import { RouteDebug } from "@/components/debug/route-debug"
+
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -70,8 +70,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </div>
       </main>
 
-      {/* 路由调试组件 - 仅在开发环境或需要调试时显示 */}
-      <RouteDebug enabled={process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEBUG_ROUTES === 'true'} />
+
     </div>
   )
 }

@@ -17,6 +17,10 @@ import {
 } from "../types"
 import { useCreditLedger, useSearchCreditLedger } from "../hooks/use-credit-ledger"
 import { CreditLedgerSkeleton } from "./credit-ledger-skeleton"
+import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcrumb"
+import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
+import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
+import { useIsMobile } from "../../../../components/ui/use-mobile"
 
 export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLedgerListProps) {
   const [institution, setInstitution] = useState("all")
@@ -29,7 +33,8 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
   const [loanSubType, setLoanSubType] = useState("all")
   const [creditType, setCreditType] = useState("all")
   const [isInitialLoading, setIsInitialLoading] = useState(true)
-  
+
+  const isMobile = useIsMobile()
   const { data: creditLedger = [], isLoading, error, refetch } = useCreditLedger()
   const searchMutation = useSearchCreditLedger()
 
@@ -91,33 +96,259 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
     return `${rate.toFixed(2)}%`
   }
 
+  // 表格列配置
+  const columns = [
+    {
+      key: 'institution',
+      label: '机构',
+      className: 'text-gray-500'
+    },
+    {
+      key: 'customerId',
+      label: '客户ID',
+      className: 'font-medium text-blue-600'
+    },
+    {
+      key: 'customerName',
+      label: '客户姓名',
+      className: 'text-gray-900'
+    },
+    {
+      key: 'productNumber',
+      label: '产品编号',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'loanType',
+      label: '贷款类型',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'creditType',
+      label: '授信类型',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'totalAmount',
+      label: '额度总额',
+      className: 'text-gray-500',
+      render: (value: number) => formatAmount(value)
+    },
+    {
+      key: 'availableAmount',
+      label: '可用额度',
+      className: 'text-gray-500',
+      render: (value: number) => formatAmount(value),
+      mobileHidden: true
+    },
+    {
+      key: 'usedAmount',
+      label: '用信金额',
+      className: 'text-gray-500',
+      render: (value: number) => formatAmount(value),
+      mobileHidden: true
+    },
+    {
+      key: 'rateType',
+      label: '年/月利率标识',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'normalRate',
+      label: '正常利率(%)',
+      className: 'text-gray-500',
+      render: (value: number) => formatRate(value),
+      mobileHidden: true
+    },
+    {
+      key: 'overdueRate',
+      label: '逾期利率(%)',
+      className: 'text-gray-500',
+      render: (value: number) => formatRate(value),
+      mobileHidden: true
+    },
+    {
+      key: 'compoundRate',
+      label: '复利利率(%)',
+      className: 'text-gray-500',
+      render: (value: number) => formatRate(value),
+      mobileHidden: true
+    },
+    {
+      key: 'repaymentMethod',
+      label: '还款方式',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'creditStatus',
+      label: '额度状态',
+      className: 'text-gray-500',
+      render: (value: string) => (
+        <Badge variant={value === '有效' ? 'default' : 'secondary'}>
+          {value}
+        </Badge>
+      ),
+      mobileHidden: true
+    },
+    {
+      key: 'ledgerStatus',
+      label: '台账状态',
+      className: 'text-gray-500',
+      render: (value: string) => (
+        <Badge variant={value === '有效' ? 'default' : 'secondary'}>
+          {value}
+        </Badge>
+      )
+    },
+    {
+      key: 'effectiveDate',
+      label: '额度起始日',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'expiryDate',
+      label: '额度到期日',
+      className: 'text-gray-500',
+      mobileHidden: true
+    },
+    {
+      key: 'actions',
+      label: '操作',
+      className: 'text-gray-500 sticky right-0 bg-white z-10 relative',
+      render: (_: any, item: any) => (
+        isMobile ? (
+          <MobileActionMenu
+            actions={[
+              {
+                label: '查看',
+                icon: <Eye className="h-3 w-3" />,
+                onClick: () => {
+                  const link = document.createElement('a');
+                  link.href = `/credit-management/ledger/${item.id}`;
+                  link.click();
+                }
+              },
+              {
+                label: '开具结清证明',
+                icon: <FileText className="h-3 w-3" />,
+                onClick: () => console.log('开具结清证明', item.id)
+              },
+              {
+                label: '下载结清证明',
+                icon: <Download className="h-3 w-3" />,
+                onClick: () => console.log('下载结清证明', item.id)
+              }
+            ]}
+          />
+        ) : (
+          <div className="flex space-x-2">
+            <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-transparent via-gray-300/25 to-white pointer-events-none -ml-4"></div>
+            <Link href={`/credit-management/ledger/${item.id}`}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+              >
+                <Eye className="h-3 w-3 mr-1" />
+                查看
+              </Button>
+            </Link>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+            >
+              <FileText className="h-3 w-3 mr-1" />
+              开具结清证明
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+            >
+              <Download className="h-3 w-3 mr-1" />
+              下载结清证明
+            </Button>
+          </div>
+        )
+      )
+    }
+  ]
+
+  // 移动端卡片渲染函数
+  const renderMobileCard = (item: any) => (
+    <div className="space-y-3">
+      <div className="flex justify-between items-start">
+        <div className="space-y-1">
+          <div className="font-medium text-gray-900">{item.customerName}</div>
+          <div className="text-sm text-blue-600">{item.customerId}</div>
+        </div>
+        <MobileActionMenu
+          actions={[
+            {
+              label: '查看',
+              icon: <Eye className="h-3 w-3" />,
+              onClick: () => {
+                const link = document.createElement('a');
+                link.href = `/credit-management/ledger/${item.id}`;
+                link.click();
+              }
+            },
+            {
+              label: '开具结清证明',
+              icon: <FileText className="h-3 w-3" />,
+              onClick: () => console.log('开具结清证明', item.id)
+            },
+            {
+              label: '下载结清证明',
+              icon: <Download className="h-3 w-3" />,
+              onClick: () => console.log('下载结清证明', item.id)
+            }
+          ]}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-2 text-sm">
+        <div>
+          <span className="text-gray-600">机构:</span>
+          <span className="ml-1 text-gray-900">{item.institution}</span>
+        </div>
+        <div>
+          <span className="text-gray-600">额度总额:</span>
+          <span className="ml-1 text-gray-900">{formatAmount(item.totalAmount)}</span>
+        </div>
+        <div>
+          <span className="text-gray-600">台账状态:</span>
+          <span className="ml-1">
+            <Badge variant={item.ledgerStatus === '有效' ? 'default' : 'secondary'}>
+              {item.ledgerStatus}
+            </Badge>
+          </span>
+        </div>
+        <div>
+          <span className="text-gray-600">额度到期:</span>
+          <span className="ml-1 text-gray-900">{item.expiryDate}</span>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className="space-y-6">
       {/* 面包屑导航 */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8"
-            onClick={onToggleSidebar}
-          >
-            <Menu className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <span>首页</span>
-            <span>/</span>
-            <span>额度管理</span>
-            <span>/</span>
-            <span className="text-gray-900">额度台账</span>
-          </div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm">管</span>
-          </div>
-        </div>
-      </div>
+      <ResponsiveBreadcrumb
+        items={[
+          { label: "首页", href: "/" },
+          { label: "额度管理" },
+          { label: "额度台账" }
+        ]}
+        onToggleSidebar={onToggleSidebar}
+      />
 
       {/* 搜索区域 */}
       <div className="bg-white p-4 rounded-lg border border-gray-200 mb-4">
@@ -270,7 +501,13 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
           <div className="p-8 text-center text-red-500">获取额度台账失败</div>
         ) : creditLedger.length === 0 ? (
           <div className="p-8 text-center text-gray-500">暂无额度台账数据</div>
+        ) : isMobile ? (
+          // 移动端卡片布局
+          <div className="p-4 space-y-3">
+            {creditLedger.map((item) => renderMobileCard(item))}
+          </div>
         ) : (
+          // 桌面端表格布局（保持原样）
           <div className="overflow-x-auto relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             <table className="min-w-full divide-y divide-gray-200" style={{ minWidth: '1800px' }}>
               <thead className="bg-gray-50">
