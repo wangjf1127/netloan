@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -16,7 +16,7 @@ interface SidebarProps {
   onClose?: () => void
 }
 
-export function Sidebar({ items, className, collapsed = false, onClose }: SidebarProps) {
+function SidebarContent({ items, className, collapsed = false, onClose }: SidebarProps) {
   const pathname = usePathname()
   const [expandedItems, setExpandedItems] = useState<string[]>(["case-management"])
 
@@ -119,5 +119,32 @@ export function Sidebar({ items, className, collapsed = false, onClose }: Sideba
       </div>
       <nav className="p-2 space-y-1">{items.map((item) => renderMenuItem(item))}</nav>
     </div>
+  )
+}
+
+export function Sidebar(props: SidebarProps) {
+  return (
+    <Suspense fallback={
+      <div className={cn(
+        "h-full bg-slate-800 text-white transition-all duration-300 ease-in-out",
+        props.collapsed ? "w-16" : "w-64",
+        props.className
+      )}>
+        <div className="p-4 border-b border-slate-700">
+          <div className="text-lg font-semibold text-white">
+            加载中...
+          </div>
+        </div>
+        <div className="p-2">
+          <div className="animate-pulse space-y-2">
+            <div className="h-8 bg-slate-700 rounded"></div>
+            <div className="h-8 bg-slate-700 rounded"></div>
+            <div className="h-8 bg-slate-700 rounded"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <SidebarContent {...props} />
+    </Suspense>
   )
 }

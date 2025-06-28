@@ -1,13 +1,13 @@
 "use client"
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
 interface RouteDebugProps {
   enabled?: boolean
 }
 
-export function RouteDebug({ enabled = false }: RouteDebugProps) {
+function RouteDebugContent() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [userAgent, setUserAgent] = useState('')
@@ -20,8 +20,6 @@ export function RouteDebug({ enabled = false }: RouteDebugProps) {
     }
   }, [])
 
-  if (!enabled) return null
-
   return (
     <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white p-3 rounded-lg text-xs max-w-sm z-50">
       <div className="font-bold mb-2">🐛 路由调试信息</div>
@@ -31,5 +29,20 @@ export function RouteDebug({ enabled = false }: RouteDebugProps) {
       <div><strong>User Agent:</strong> {userAgent.substring(0, 50)}...</div>
       <div><strong>窗口大小:</strong> {typeof window !== 'undefined' ? `${window.innerWidth}x${window.innerHeight}` : '未知'}</div>
     </div>
+  )
+}
+
+export function RouteDebug({ enabled = false }: RouteDebugProps) {
+  if (!enabled) return null
+
+  return (
+    <Suspense fallback={
+      <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white p-3 rounded-lg text-xs max-w-sm z-50">
+        <div className="font-bold mb-2">🐛 路由调试信息</div>
+        <div>加载中...</div>
+      </div>
+    }>
+      <RouteDebugContent />
+    </Suspense>
   )
 }

@@ -13,8 +13,8 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-    // 如果需要完全禁用图片优化，取消下面的注释
-    // unoptimized: true,
+    // 为了避免构建问题，暂时禁用图片优化
+    unoptimized: true,
   },
 
   // 构建优化
