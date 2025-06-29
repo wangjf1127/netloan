@@ -103,7 +103,7 @@ function SidebarContent({ items, className, collapsed = false, onClose }: Sideba
           "text-lg font-semibold text-white transition-opacity duration-300",
           collapsed ? "opacity-0" : "opacity-100"
         )}>
-          {collapsed ? "" : "风险驾驶舱"}
+          {collapsed ? "" : "互联网信贷"}
         </h2>
         {/* 移动端关闭按钮 */}
         {onClose && !collapsed && (

@@ -263,7 +263,7 @@ export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: Cre
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">全部</SelectItem>
-                <SelectItem value="上海农村商业银行">上海农村商业银行</SelectItem>
+                <SelectItem value="上海**银行商业银行">上海**银行商业银行</SelectItem>
               </SelectContent>
             </Select>
           </div>

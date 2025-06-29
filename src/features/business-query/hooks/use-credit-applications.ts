@@ -5,7 +5,7 @@ import type { CreditApplication, CreditApplicationSearchParams, CreditAgreement,
 const mockCreditApplications: CreditApplication[] = [
   {
     id: '1',
-    institution: '上海农村商业银行',
+    institution: '上海**银行商业银行',
     productNumber: 'PRD0000004500002',
     businessChannel: '奇瑞车贷-消费',
     subBusinessChannel: '',

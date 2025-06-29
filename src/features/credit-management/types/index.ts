@@ -80,7 +80,7 @@ export const CREDIT_TYPE_OPTIONS = [
 
 // 机构选项
 export const INSTITUTION_OPTIONS = [
-  { value: "shanghai-rural-bank", label: "上海农村商业银行" },
+  { value: "shanghai-rural-bank", label: "上海**银行商业银行" },
   { value: "beijing-rural-bank", label: "北京农村商业银行" },
   { value: "guangzhou-rural-bank", label: "广州农村商业银行" },
 ] as const

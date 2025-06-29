@@ -304,7 +304,7 @@ export function CreditWithdrawalList({ sidebarCollapsed, onToggleSidebar }: Cred
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">全部</SelectItem>
-                <SelectItem value="上海农村商业银行">上海农村商业银行</SelectItem>
+                <SelectItem value="上海**银行商业银行">上海**银行商业银行</SelectItem>
                 <SelectItem value="中国工商银行">中国工商银行</SelectItem>
                 <SelectItem value="中国建设银行">中国建设银行</SelectItem>
               </SelectContent>
@@ -454,7 +454,11 @@ export function CreditWithdrawalList({ sidebarCollapsed, onToggleSidebar }: Cred
         ) : isMobile ? (
           // 移动端卡片布局
           <div className="p-4 space-y-3">
-            {paginatedWithdrawals.map((withdrawal) => renderMobileCard(withdrawal))}
+            {paginatedWithdrawals.map((withdrawal) => (
+              <div key={withdrawal.id}>
+                {renderMobileCard(withdrawal)}
+              </div>
+            ))}
           </div>
         ) : (
           // 桌面端表格布局

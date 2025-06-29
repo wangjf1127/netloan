@@ -63,7 +63,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
       customerId: "264997",
       transactionType: "提现",
       processingResult: "正常",
-      institution: "上海农村商业银行",
+      institution: "上海**银行商业银行",
       transactionDate: "2029-04-29",
       productNumber: "PROD0000004500022",
       receiptNumber: "9990000033671779408280092672000"
@@ -339,7 +339,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                       <SelectValue placeholder="请选择机构" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="00004">00004-上海农村商业银行</SelectItem>
+                      <SelectItem value="00004">00004-上海**银行商业银行</SelectItem>
                       <SelectItem value="all">全部</SelectItem>
                     </SelectContent>
                   </Select>
@@ -401,7 +401,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           正常
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海农村商业银行</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海**银行商业银行</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-04-20</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <Button
@@ -427,7 +427,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           正常
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海农村商业银行</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海**银行商业银行</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-05-28</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <Button
@@ -453,7 +453,7 @@ export function CreditLedgerDetail({ creditId }: CreditLedgerDetailProps) {
                           正常
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海农村商业银行</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">上海**银行商业银行</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-08-08</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <Button

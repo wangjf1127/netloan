@@ -48,7 +48,7 @@ export function TestRecordSearch({ onSearch, onReset, loading }: TestRecordSearc
               <SelectValue placeholder="请选择机构" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="上海农村商业银行">上海农村商业银行</SelectItem>
+              <SelectItem value="上海**银行商业银行">上海**银行商业银行</SelectItem>
               <SelectItem value="中国工商银行">中国工商银行</SelectItem>
               <SelectItem value="中国建设银行">中国建设银行</SelectItem>
             </SelectContent>

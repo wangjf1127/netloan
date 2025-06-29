@@ -3,8 +3,8 @@ import type { CreditLedgerItem } from '../types'
 export const mockCreditLedger: CreditLedgerItem[] = [
   {
     id: "1",
-    institution: "上海农村商业银行",
-    branch: "上海农村商业银行股份有限公司",
+    institution: "上海**银行商业银行",
+    branch: "上海**银行商业银行股份有限公司",
     customerId: "C001",
     customerName: "张三",
     productNumber: "PRD001",

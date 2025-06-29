@@ -6,8 +6,8 @@ import { QueryProvider } from "@/features/providers/query-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "风险驾驶舱",
-  description: "风险驾驶舱系统",
+  title: "互联网信贷",
+  description: "互联网信贷系统",
 }
 
 export default function RootLayout({

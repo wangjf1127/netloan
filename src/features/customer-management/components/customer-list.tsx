@@ -96,7 +96,7 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">全部</SelectItem>
-                <SelectItem value="上海农村商业银行">上海农村商业银行</SelectItem>
+                <SelectItem value="上海**银行商业银行">上海**银行商业银行</SelectItem>
                 <SelectItem value="北京银行">北京银行</SelectItem>
               </SelectContent>
             </Select>
@@ -260,7 +260,7 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
                 {customers.map((customer, index) => (
                   <tr key={customer.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      上海农村商业银行
+                      上海**银行商业银行
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
                       {customer.customerId}

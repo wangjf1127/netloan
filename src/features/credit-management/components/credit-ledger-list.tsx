@@ -504,7 +504,11 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
         ) : isMobile ? (
           // 移动端卡片布局
           <div className="p-4 space-y-3">
-            {creditLedger.map((item) => renderMobileCard(item))}
+            {creditLedger.map((item) => (
+              <div key={item.id}>
+                {renderMobileCard(item)}
+              </div>
+            ))}
           </div>
         ) : (
           // 桌面端表格布局（保持原样）

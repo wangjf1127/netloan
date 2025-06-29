@@ -157,4 +157,18 @@ export const sidebarMenuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    id: "product-management",
+    label: "产品管理",
+    icon: "Package",
+    path: "/product-management",
+    children: [
+      {
+        id: "product-query",
+        label: "产品查询",
+        icon: "Search",
+        path: "/product-management/product-query",
+      },
+    ],
+  },
 ]

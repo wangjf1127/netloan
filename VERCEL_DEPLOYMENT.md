@@ -43,7 +43,7 @@ git push -u origin main
 ### 3. 环境变量配置
 在Vercel项目设置中添加环境变量：
 ```
-NEXT_PUBLIC_APP_NAME=风险驾驶舱
+NEXT_PUBLIC_APP_NAME=互联网信贷
 NEXT_PUBLIC_APP_VERSION=1.0.0
 NODE_ENV=production
 ```

@@ -56,7 +56,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           >
             <Menu className="h-5 w-5" />
           </Button>
-          <h1 className="text-lg font-semibold text-gray-900">风险驾驶舱</h1>
+          <h1 className="text-lg font-semibold text-gray-900">互联网信贷</h1>
           <div className="w-8" /> {/* 占位符保持居中 */}
         </div>
 

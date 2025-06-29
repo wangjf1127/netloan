@@ -8,7 +8,7 @@ const mockTestRecords: TestRecord[] = [
   {
     id: "1",
     customerId: "204997",
-    institution: "上海农村商业银行",
+    institution: "上海**银行商业银行",
     loanType: "担保类",
     loanSubtype: "信用类-消费贷现金",
     businessChannel: "奇瑞车贷-消费",
@@ -22,7 +22,7 @@ const mockTestRecords: TestRecord[] = [
   {
     id: "2",
     customerId: "204997",
-    institution: "上海农村商业银行",
+    institution: "上海**银行商业银行",
     loanType: "担保类",
     loanSubtype: "信用类-消费贷现金",
     businessChannel: "奇瑞车贷-消费",
@@ -36,7 +36,7 @@ const mockTestRecords: TestRecord[] = [
   {
     id: "3",
     customerId: "204997",
-    institution: "上海农村商业银行",
+    institution: "上海**银行商业银行",
     loanType: "担保类",
     loanSubtype: "信用类-消费贷现金",
     businessChannel: "奇瑞车贷-消费",
