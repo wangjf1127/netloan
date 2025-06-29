@@ -71,3 +71,37 @@ export interface CreditAgreementListProps {
   sidebarCollapsed?: boolean
   onToggleSidebar?: () => void
 }
+
+// 贷款合同相关类型定义
+
+export interface LoanContract {
+  id: string
+  customerId: string           // 客户ID
+  institution: string          // 机构
+  materialType: string         // 资料类型
+  contractNumber: string       // 电签系统合同编号
+  contractType: string         // 合同类型
+  contractName: string         // 合同名称
+  // 详情弹窗额外字段
+  customerName?: string        // 客户名称
+  applicationNumber?: string   // 对象申请编号
+  fileCategory?: string        // 文件分类
+  fileType?: string           // 文件类型
+  fileName?: string           // 文件名称
+  filePath?: string           // 文件路径
+  fileRemark?: string         // 文件备注
+}
+
+export interface LoanContractSearchParams {
+  institution?: string
+  customerId?: string
+  customerName?: string
+  customerPhone?: string
+  customerIdCard?: string
+  materialType?: string
+}
+
+export interface LoanContractListProps {
+  sidebarCollapsed?: boolean
+  onToggleSidebar?: () => void
+}

@@ -143,6 +143,12 @@ export const sidebarMenuItems: MenuItem[] = [
         icon: "FileCheck",
         path: "/business-query/credit-agreement",
       },
+      {
+        id: "loan-contract",
+        label: "贷款合同",
+        icon: "FileSignature",
+        path: "/business-query/loan-contract",
+      },
     ],
   },
 ]
