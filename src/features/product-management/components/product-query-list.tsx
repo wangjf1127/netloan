@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
 import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcrumb"
 
@@ -17,6 +18,7 @@ interface ProductQueryListProps {
 }
 
 export function ProductQueryList({ sidebarCollapsed, onToggleSidebar }: ProductQueryListProps) {
+  const router = useRouter()
   const isMobile = useIsMobile()
   const [isInitialLoading, setIsInitialLoading] = useState(true)
 
@@ -46,8 +48,8 @@ export function ProductQueryList({ sidebarCollapsed, onToggleSidebar }: ProductQ
   }
 
   const handleViewDetail = (product: Product) => {
-    console.log('查看产品详情:', product)
-    // TODO: 实现产品详情查看功能
+    // 跳转到产品详情页面
+    router.push(`/product-management/product-query/${product.id}`)
   }
 
   // 计算分页数据
