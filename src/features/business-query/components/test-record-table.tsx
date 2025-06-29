@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/shared/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { TestRecord } from "../types"
 
 interface TestRecordTableProps {
