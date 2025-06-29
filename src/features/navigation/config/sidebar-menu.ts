@@ -149,6 +149,12 @@ export const sidebarMenuItems: MenuItem[] = [
         icon: "FileSignature",
         path: "/business-query/loan-contract",
       },
+      {
+        id: "credit-withdrawal",
+        label: "额度提现",
+        icon: "CreditCard",
+        path: "/business-query/credit-withdrawal",
+      },
     ],
   },
 ]

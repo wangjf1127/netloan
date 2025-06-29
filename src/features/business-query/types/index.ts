@@ -105,3 +105,82 @@ export interface LoanContractListProps {
   sidebarCollapsed?: boolean
   onToggleSidebar?: () => void
 }
+
+// 测试记录相关类型定义
+
+export interface TestRecord {
+  id: string
+  customerId: string           // 客户ID
+  institution: string          // 机构
+  loanType: string            // 贷款类型
+  loanSubtype: string         // 贷款子类型
+  businessChannel: string     // 业务渠道
+  subBusinessChannel?: string // 子业务渠道
+  loanPurpose?: string        // 贷款用途
+  withdrawalAmount: number    // 提现金额(元)
+  withdrawalDate: string      // 提现日期
+  processingResult: string    // 处理结果
+  remainingDays: number       // 还剩日
+}
+
+export interface TestRecordSearchParams {
+  institution?: string        // 机构
+  customerId?: string         // 客户ID
+  customerName?: string       // 客户姓名
+  customerPhone?: string      // 客户手机号
+  customerIdCard?: string     // 客户身份证
+  processingResult?: string   // 处理结果
+  loanType?: string          // 贷款类型
+  loanSubtype?: string       // 贷款子类型
+  channel?: string           // 渠道
+  withdrawalDate?: string    // 提现日期
+}
+
+export interface TestRecordListProps {
+  sidebarCollapsed?: boolean
+  onToggleSidebar?: () => void
+}
+
+// 额度提现相关类型定义
+
+export interface CreditWithdrawal {
+  id: string
+  customerId: string           // 客户ID
+  institution: string          // 机构
+  loanType: string            // 贷款类型
+  loanSubtype: string         // 贷款子类型
+  businessChannel: string     // 业务渠道
+  subBusinessChannel?: string // 子业务渠道
+  loanPurpose?: string        // 贷款用途
+  withdrawalAmount: number    // 提现金额(元)
+  withdrawalDate: string      // 提现日期
+  processingResult: string    // 处理结果
+  remainingDays: number       // 还剩日
+  // 弹窗详情字段
+  institutionCode: string     // 机构代码
+  customerName: string        // 客户名称
+  loanNumber: string          // 借据号
+  applicationAmount: number   // 申请金额
+  loanDirection?: string      // 贷款投向
+  repaymentMethod: string     // 还款方式
+  repaymentDay: number        // 还款日
+  loanAccount: string         // 贷款账号
+}
+
+export interface CreditWithdrawalSearchParams {
+  institution?: string        // 机构
+  customerId?: string         // 客户ID
+  customerName?: string       // 客户姓名
+  customerPhone?: string      // 客户手机号
+  customerIdCard?: string     // 客户身份证
+  processingResult?: string   // 处理结果
+  loanType?: string          // 贷款类型
+  loanSubtype?: string       // 贷款子类型
+  channel?: string           // 渠道
+  withdrawalDate?: string    // 提现日期
+}
+
+export interface CreditWithdrawalListProps {
+  sidebarCollapsed?: boolean
+  onToggleSidebar?: () => void
+}
