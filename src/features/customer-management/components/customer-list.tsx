@@ -9,6 +9,7 @@ import { Search, RotateCcw, Menu, Eye, Edit, FileText, Download, Trash2, User } 
 import type { CustomerListProps } from "../types"
 import { useCustomers, useSearchCustomers } from "../hooks/use-customers"
 import { CustomerListSkeleton } from "./customer-list-skeleton"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerListProps) {
   const [customerId, setCustomerId] = useState("")
@@ -266,16 +267,16 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
                       {customer.customerId}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {customer.customerName}
+                      {maskSensitiveData(customer.customerName, 'name')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {customer.phoneNumber}
+                      {maskSensitiveData(customer.phoneNumber, 'phone')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {customer.certificateType}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {customer.certificateNumber}
+                      {maskSensitiveData(customer.certificateNumber, 'idCard')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {customer.customerType}

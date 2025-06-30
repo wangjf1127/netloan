@@ -13,6 +13,7 @@ import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { Pagination } from "@/shared/components/ui/pagination"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CreditWithdrawalList({ sidebarCollapsed, onToggleSidebar }: CreditWithdrawalListProps) {
   const [isInitialLoading, setIsInitialLoading] = useState(true)
@@ -503,7 +504,7 @@ export function CreditWithdrawalList({ sidebarCollapsed, onToggleSidebar }: Cred
 
                 <div className="text-left">
                   <span className="text-gray-600">客户名称:</span>
-                  <span className="ml-2 text-gray-900">{selectedWithdrawal.customerName}</span>
+                  <span className="ml-2 text-gray-900">{maskSensitiveData(selectedWithdrawal.customerName, 'name')}</span>
                 </div>
 
                 <div className="text-left">

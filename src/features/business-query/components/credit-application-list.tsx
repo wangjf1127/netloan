@@ -14,6 +14,7 @@ import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcru
 import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: CreditApplicationListProps) {
   const [institution, setInstitution] = useState("all")
@@ -177,7 +178,7 @@ export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: Cre
     <div className="space-y-3">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <div className="font-medium text-gray-900">{application.customerName}</div>
+          <div className="font-medium text-gray-900">{maskSensitiveData(application.customerName, 'name')}</div>
           <div className="text-sm text-gray-600">客户ID: {application.customerId}</div>
         </div>
         <MobileActionMenu
@@ -210,28 +211,7 @@ export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: Cre
     </div>
   )
 
-  // 脱敏处理函数
-  const maskSensitiveData = (data: string, type: 'phone' | 'idCard' | 'email' = 'idCard') => {
-    if (!data) return data
 
-    switch (type) {
-      case 'phone':
-        return data.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-      case 'idCard':
-        return data.replace(/(\d{6})\d{8}(\d{4})/, '$1********$2')
-      case 'email':
-        const [username, domain] = data.split('@')
-        if (username && domain) {
-          const maskedUsername = username.length > 2
-            ? username.substring(0, 2) + '*'.repeat(username.length - 2)
-            : username
-          return `${maskedUsername}@${domain}`
-        }
-        return data
-      default:
-        return data
-    }
-  }
 
   // 显示骨架屏
   if (isInitialLoading) {
@@ -525,7 +505,7 @@ export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: Cre
 
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">客户名称:</span>
-                  <span className="text-gray-900 font-medium">时欢</span>
+                  <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.customerName, 'name')}</span>
                 </div>
 
                 <div className="flex items-center space-x-2">

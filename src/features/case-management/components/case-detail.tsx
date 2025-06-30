@@ -9,6 +9,7 @@ import { useState, useEffect } from "react"
 import type { CaseDetailProps, CaseDetailData } from "../types"
 import { mockCaseDetail } from "../data/mock-case-detail"
 import { CaseDetailSkeleton } from "./case-detail-skeleton"
+import { maskSensitiveData } from "@/lib/utils"
 
 // 解析决策流信息的辅助函数
 function parseDecisionFlowInfo(info: string): string[] {
@@ -166,16 +167,16 @@ export function CaseDetail({ caseId }: CaseDetailProps) {
               <div className="p-4">
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <div className="text-sm">客户姓名：{caseData.clientName}</div>
+                    <div className="text-sm">客户姓名：{maskSensitiveData(caseData.clientName, 'name')}</div>
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">客户手机号：{caseData.phone}</span>
+                      <span className="text-sm">客户手机号：{maskSensitiveData(caseData.phone, 'phone')}</span>
                       <a href="#" className="text-blue-500 text-xs">查询历史记录</a>
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm">身份证：{caseData.idCard}</div>
+                    <div className="text-sm">身份证：{maskSensitiveData(caseData.idCard, 'idCard')}</div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-4">
@@ -184,7 +185,7 @@ export function CaseDetail({ caseId }: CaseDetailProps) {
                     <div className="text-sm text-gray-500 mt-1">一般管理工作岗位: {caseData.company}</div>
                   </div>
                   <div>
-                    <div className="text-sm">详细住址：{caseData.address}</div>
+                    <div className="text-sm">详细住址：{maskSensitiveData(caseData.address, 'address')}</div>
                   </div>
                   <div>
                     <div className="text-sm">产品名称：{caseData.product}</div>
@@ -209,13 +210,13 @@ export function CaseDetail({ caseId }: CaseDetailProps) {
               <div className="p-4">
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <div className="text-sm">姓名：{caseData.contact.name}</div>
+                    <div className="text-sm">姓名：{maskSensitiveData(caseData.contact.name, 'name')}</div>
                   </div>
                   <div>
                     <div className="text-sm">关系：{caseData.contact.relation}</div>
                   </div>
                   <div>
-                    <div className="text-sm">手机号：{caseData.contact.phone}</div>
+                    <div className="text-sm">手机号：{maskSensitiveData(caseData.contact.phone, 'phone')}</div>
                   </div>
                 </div>
               </div>
@@ -235,7 +236,7 @@ export function CaseDetail({ caseId }: CaseDetailProps) {
                     <div className="text-sm">有效日期：{caseData.idCardInfo.validDate}</div>
                   </div>
                   <div>
-                    <div className="text-sm">身份证地址：{caseData.idCardInfo.address}</div>
+                    <div className="text-sm">身份证地址：{maskSensitiveData(caseData.idCardInfo.address, 'address')}</div>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-4">

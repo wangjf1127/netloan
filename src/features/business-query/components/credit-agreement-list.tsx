@@ -15,6 +15,7 @@ import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcru
 import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CreditAgreementList({ sidebarCollapsed, onToggleSidebar }: CreditAgreementListProps) {
   const [institution, setInstitution] = useState("all")
@@ -101,7 +102,8 @@ export function CreditAgreementList({ sidebarCollapsed, onToggleSidebar }: Credi
     {
       key: 'customerName',
       label: '客户名称',
-      className: 'text-gray-900'
+      className: 'text-gray-900',
+      render: (value: string) => maskSensitiveData(value, 'name')
     },
     {
       key: 'totalAmount',
@@ -152,7 +154,7 @@ export function CreditAgreementList({ sidebarCollapsed, onToggleSidebar }: Credi
     <div className="space-y-3">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <div className="font-medium text-gray-900">{agreement.customerName}</div>
+          <div className="font-medium text-gray-900">{maskSensitiveData(agreement.customerName, 'name')}</div>
           <div className="text-sm text-gray-600">客户号: {agreement.customerId}</div>
         </div>
         <MobileActionMenu
@@ -185,28 +187,7 @@ export function CreditAgreementList({ sidebarCollapsed, onToggleSidebar }: Credi
     </div>
   )
 
-  // 脱敏处理函数
-  const maskSensitiveData = (data: string, type: 'phone' | 'idCard' | 'email' = 'idCard') => {
-    if (!data) return data
 
-    switch (type) {
-      case 'phone':
-        return data.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-      case 'idCard':
-        return data.replace(/(\d{6})\d{8}(\d{4})/, '$1********$2')
-      case 'email':
-        const [username, domain] = data.split('@')
-        if (username && domain) {
-          const maskedUsername = username.length > 2
-            ? username.substring(0, 2) + '*'.repeat(username.length - 2)
-            : username
-          return `${maskedUsername}@${domain}`
-        }
-        return data
-      default:
-        return data
-    }
-  }
 
   // 显示骨架屏
   if (isInitialLoading) {
@@ -463,7 +444,7 @@ export function CreditAgreementList({ sidebarCollapsed, onToggleSidebar }: Credi
               </div>
               <div className="text-left">
                 <span className="text-sm text-gray-600">客户名称:</span>
-                <span className="ml-2 text-sm text-gray-900">{selectedAgreement.customerName}</span>
+                <span className="ml-2 text-sm text-gray-900">{maskSensitiveData(selectedAgreement.customerName, 'name')}</span>
               </div>
               <div className="text-left">
                 <span className="text-sm text-gray-600">机构:</span>

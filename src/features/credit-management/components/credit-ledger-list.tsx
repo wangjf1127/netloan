@@ -21,6 +21,7 @@ import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcru
 import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLedgerListProps) {
   const [institution, setInstitution] = useState("all")
@@ -111,7 +112,8 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
     {
       key: 'customerName',
       label: '客户姓名',
-      className: 'text-gray-900'
+      className: 'text-gray-900',
+      render: (value: string) => maskSensitiveData(value, 'name')
     },
     {
       key: 'productNumber',
@@ -286,7 +288,7 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
     <div className="space-y-3">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <div className="font-medium text-gray-900">{item.customerName}</div>
+          <div className="font-medium text-gray-900">{maskSensitiveData(item.customerName, 'name')}</div>
           <div className="text-sm text-blue-600">{item.customerId}</div>
         </div>
         <MobileActionMenu

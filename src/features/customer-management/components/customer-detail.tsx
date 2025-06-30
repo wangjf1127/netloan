@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui
 import { useCustomerDetail } from "../hooks/use-customer-detail"
 import { CustomerDetailSkeleton } from "./customer-detail-skeleton"
 import type { CustomerDetailProps } from "../types"
+import { maskSensitiveData } from "@/lib/utils"
 
 export function CustomerDetail({ customerId }: CustomerDetailProps) {
   const [isInitialLoading, setIsInitialLoading] = useState(true)
@@ -177,7 +178,7 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">客户名称：</span>
-                  <span className="font-medium">{customer.customerName}</span>
+                  <span className="font-medium">{maskSensitiveData(customer.customerName, 'name')}</span>
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">出生日期：</span>
@@ -237,7 +238,7 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
               <div className="space-y-4">
                 <div className="flex">
                   <span className="w-32 text-gray-500">证件号码：</span>
-                  <span className="font-medium">{customer.certificateNumber}</span>
+                  <span className="font-medium">{maskSensitiveData(customer.certificateNumber, 'idCard')}</span>
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">证件有效期起始日期：</span>
@@ -252,11 +253,11 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
             <div className="space-y-4">
               <div className="flex">
                 <span className="w-32 text-gray-500">手机号码：</span>
-                <span className="font-medium">{customer.phoneNumber}</span>
+                <span className="font-medium">{maskSensitiveData(customer.phoneNumber, 'phone')}</span>
               </div>
               <div className="flex">
                 <span className="w-32 text-gray-500">身份地址：</span>
-                <span className="font-medium">{customer.address}</span>
+                <span className="font-medium">{maskSensitiveData(customer.address, 'address')}</span>
               </div>
             </div>
           </div>
@@ -267,7 +268,7 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
               <div className="space-y-4">
                 <div className="flex">
                   <span className="w-32 text-gray-500">姓名：</span>
-                  <span className="font-medium">{customer.spouseName || '未知'}</span>
+                  <span className="font-medium">{customer.spouseName ? maskSensitiveData(customer.spouseName, 'name') : '未知'}</span>
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">证件类型：</span>
@@ -281,11 +282,11 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">证件号码：</span>
-                  <span className="font-medium">{customer.spouseCertificateNumber || '未知'}</span>
+                  <span className="font-medium">{customer.spouseCertificateNumber ? maskSensitiveData(customer.spouseCertificateNumber, 'idCard') : '未知'}</span>
                 </div>
                 <div className="flex">
                   <span className="w-32 text-gray-500">手机号码：</span>
-                  <span className="font-medium">{customer.spousePhoneNumber || '未知'}</span>
+                  <span className="font-medium">{customer.spousePhoneNumber ? maskSensitiveData(customer.spousePhoneNumber, 'phone') : '未知'}</span>
                 </div>
               </div>
             </div>
