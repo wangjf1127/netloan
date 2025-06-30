@@ -34,6 +34,12 @@ export interface AccountQueryListProps {
   onToggleSidebar?: () => void
 }
 
+// 绑卡查询相关类型
+export * from './card-binding'
+
+// 贷款交易流水相关类型
+export * from './loan-transaction'
+
 export interface LoanReceiptDetail {
   productCode: string
   loanAccountNumber: string

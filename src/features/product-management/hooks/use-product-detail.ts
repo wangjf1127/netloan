@@ -7,7 +7,7 @@ import type { ProductDetail } from "../types"
 const mockProductDetail: ProductDetail = {
   id: "1",
   institutionCode: "00000045",
-  institutionName: "上海农村商业银行",
+  institutionName: "上海**商业银行",
   branchInstitution: "00004",
   productCode: "00000045",
   productName: "鑫E贷",

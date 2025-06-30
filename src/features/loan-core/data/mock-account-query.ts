@@ -3,7 +3,7 @@ import type { AccountQuery, LoanReceiptDetail, LoanTransactionData, InstallmentP
 export const mockAccountQueryData: AccountQuery[] = [
   {
     id: "1",
-    institution: "上海农村商业银行",
+    institution: "上海**商业银行",
     customerId: "204997",
     loanAccountNumber: "9990000033671779408322035712000",
     loanReceiptNumber: "9990000033671779408280092672000",
@@ -21,7 +21,7 @@ export const mockAccountQueryData: AccountQuery[] = [
   },
   {
     id: "2",
-    institution: "上海农村商业银行",
+    institution: "上海**商业银行",
     customerId: "204997",
     loanAccountNumber: "9990000033671796303983083520000",
     loanReceiptNumber: "9990000033671796303947431936000",
@@ -39,7 +39,7 @@ export const mockAccountQueryData: AccountQuery[] = [
   },
   {
     id: "3",
-    institution: "上海农村商业银行",
+    institution: "上海**商业银行",
     customerId: "204997",
     loanAccountNumber: "9990000033671941130181738496000",
     loanReceiptNumber: "9990000033671941130143989760000",
@@ -124,7 +124,7 @@ export const mockLoanReceiptDetail: LoanReceiptDetail = {
   depositAccount: "4013100083396567",
   accountName: "奇司",
   bankCode: "322290000011",
-  bankName: "上海农村商业银行股份有限公司营业部",
+  bankName: "上海**商业银行股份有限公司营业部",
   repaymentMethod: "等本还款",
   interestCycle: "1|M|A|*",
   principalCycle: "1|M|A|E",

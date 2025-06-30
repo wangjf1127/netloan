@@ -313,22 +313,7 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
                             还款计划
                           </Button>
                         </Link>
-                        <NotImplementedButton
-                          featureName="用户信息更新"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
-                        >
-                          用户信息更新
-                        </NotImplementedButton>
-                        <NotImplementedButton
-                          featureName="客户注销"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
-                        >
-                          客户注销
-                        </NotImplementedButton>
+                        
                       </div>
                     </td>
                   </tr>

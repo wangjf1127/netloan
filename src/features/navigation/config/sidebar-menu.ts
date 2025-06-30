@@ -197,6 +197,29 @@ export const sidebarMenuItems: MenuItem[] = [
         path: "/loan-core/account-query",
         implemented: true, // 已实现
       },
+      {
+        id: "card-binding-query",
+        label: "绑卡查询",
+        icon: "CreditCard",
+        path: "/loan-core/card-binding-query",
+        implemented: true, // 已实现
+      },
+      {
+        id: "transaction-query",
+        label: "流水查询",
+        icon: "FileText",
+        path: "/loan-core/transaction-query",
+        implemented: true, // 已实现
+        children: [
+          {
+            id: "loan-transaction",
+            label: "贷款交易流水",
+            icon: "List",
+            path: "/loan-core/transaction-query/loan-transaction",
+            implemented: true, // 已实现
+          },
+        ],
+      },
     ],
   },
 ]
