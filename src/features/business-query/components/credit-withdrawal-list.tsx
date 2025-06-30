@@ -467,7 +467,6 @@ export function CreditWithdrawalList({ sidebarCollapsed, onToggleSidebar }: Cred
             columns={columns}
             data={paginatedWithdrawals}
             keyField="id"
-            className="min-h-[400px]"
           />
         )}
 

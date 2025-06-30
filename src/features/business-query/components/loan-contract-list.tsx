@@ -331,7 +331,6 @@ export function LoanContractList({ sidebarCollapsed, onToggleSidebar }: LoanCont
             columns={columns}
             data={paginatedContracts}
             keyField="id"
-            className="min-h-[400px]"
           />
         )}
 

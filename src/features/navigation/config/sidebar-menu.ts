@@ -183,4 +183,20 @@ export const sidebarMenuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    id: "loan-core",
+    label: "贷款核心",
+    icon: "CreditCard",
+    path: "/loan-core",
+    implemented: true, // 已实现
+    children: [
+      {
+        id: "account-query",
+        label: "账户查询",
+        icon: "Search",
+        path: "/loan-core/account-query",
+        implemented: true, // 已实现
+      },
+    ],
+  },
 ]

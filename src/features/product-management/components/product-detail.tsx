@@ -125,7 +125,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                 value="calculation-info"
                 className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
               >
-                计算信息
+                计息信息
               </TabsTrigger>
             </TabsList>
 
@@ -376,27 +376,511 @@ export function ProductDetail({ productId }: ProductDetailProps) {
 
         {/* 放款信息标签页 */}
         <TabsContent value="payment-info" className="mt-0">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="text-center text-gray-500 py-8">
-              放款信息功能开发中...
-            </div>
+          <div className="bg-white rounded-lg border border-gray-200">
+            {/* 页签导航放在内容区域顶部 */}
+            <TabsList className="w-full bg-white border-b border-gray-200 rounded-t-lg rounded-b-none p-1 justify-start">
+              <TabsTrigger
+                value="basic-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                基本信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="payment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                放款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="repayment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                还款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="calculation-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                计息信息
+              </TabsTrigger>
+            </TabsList>
+
+            {/* 放款信息内容 */}
+            {isMobile ? (
+              // 移动端卡片布局
+              <div className="p-4">
+                <div className="space-y-3">
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">机构代码</span>
+                    <span className="font-medium">{formatValue(product.institutionCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">机构名称</span>
+                    <span className="font-medium">{formatValue(product.institutionName)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">分支机构</span>
+                    <span className="font-medium">{formatValue(product.branchInstitution)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">部件代码</span>
+                    <span className="font-medium">{formatValue(product.componentCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">部件名称</span>
+                    <span className="font-medium">{formatValue(product.componentName)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">货币代码</span>
+                    <span className="font-medium">{formatValue(product.currencyCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">最短贷款期限</span>
+                    <span className="font-medium">{formatValue(product.minLoanTerm)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">最长贷款期限</span>
+                    <span className="font-medium">{formatValue(product.maxLoanTerm)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">最大放款次数</span>
+                    <span className="font-medium">{formatValue(product.maxLoanCount)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">资金来源</span>
+                    <span className="font-medium">{formatValue(product.fundingSource)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">每次最小金额</span>
+                    <span className="font-medium">{product.minAmount ? formatNumber(product.minAmount) : '-'}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">每次最大金额</span>
+                    <span className="font-medium">{product.maxAmount ? formatNumber(product.maxAmount) : '-'}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // 桌面端2列布局
+              <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">机构代码:</span>
+                      <span className="font-medium">{formatValue(product.institutionCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">机构名称:</span>
+                      <span className="font-medium">{formatValue(product.institutionName)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">分支机构:</span>
+                      <span className="font-medium">{formatValue(product.branchInstitution)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">部件代码:</span>
+                      <span className="font-medium">{formatValue(product.componentCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">部件名称:</span>
+                      <span className="font-medium">{formatValue(product.componentName)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">货币代码:</span>
+                      <span className="font-medium">{formatValue(product.currencyCode)}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">最短贷款期限:</span>
+                      <span className="font-medium">{formatValue(product.minLoanTerm)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">最长贷款期限:</span>
+                      <span className="font-medium">{formatValue(product.maxLoanTerm)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">最大放款次数:</span>
+                      <span className="font-medium">{formatValue(product.maxLoanCount)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">资金来源:</span>
+                      <span className="font-medium">{formatValue(product.fundingSource)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">每次最小金额:</span>
+                      <span className="font-medium">{product.minAmount ? formatNumber(product.minAmount) : '-'}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-40 text-gray-500">每次最大金额:</span>
+                      <span className="font-medium">{product.maxAmount ? formatNumber(product.maxAmount) : '-'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </TabsContent>
 
         {/* 还款信息标签页 */}
         <TabsContent value="repayment-info" className="mt-0">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="text-center text-gray-500 py-8">
-              还款信息功能开发中...
-            </div>
+          <div className="bg-white rounded-lg border border-gray-200">
+            {/* 页签导航放在内容区域顶部 */}
+            <TabsList className="w-full bg-white border-b border-gray-200 rounded-t-lg rounded-b-none p-1 justify-start">
+              <TabsTrigger
+                value="basic-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                基本信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="payment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                放款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="repayment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                还款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="calculation-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                计息信息
+              </TabsTrigger>
+            </TabsList>
+
+            {/* 还款信息内容 */}
+            {isMobile ? (
+              // 移动端卡片布局
+              <div className="p-4">
+                <div className="space-y-3">
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">机构代码</span>
+                    <span className="font-medium">{formatValue(product.institutionCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">机构名称</span>
+                    <span className="font-medium">{formatValue(product.institutionName)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">分支机构</span>
+                    <span className="font-medium">{formatValue(product.branchInstitution)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">部件代码</span>
+                    <span className="font-medium">{formatValue(product.componentCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">部件名称</span>
+                    <span className="font-medium">{formatValue(product.componentName)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">货币代码</span>
+                    <span className="font-medium">{formatValue(product.currencyCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">还息周期</span>
+                    <span className="font-medium">{formatValue(product.interestCycle)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">还本周期</span>
+                    <span className="font-medium">{formatValue(product.principalCycle)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">按次还款周期</span>
+                    <span className="font-medium">{formatValue(product.perPaymentCycle)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">已成直达款顺序</span>
+                    <span className="font-medium">{formatValue(product.directPaymentOrder)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">还款顺序</span>
+                    <span className="font-medium">{formatValue(product.repaymentOrder)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">还款最小天数</span>
+                    <span className="font-medium">{formatValue(product.minRepaymentDays)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">最大还款日</span>
+                    <span className="font-medium">{formatValue(product.maxRepaymentDay)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">固定还款日</span>
+                    <span className="font-medium">{formatValue(product.fixedRepaymentDay)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">是否同一还款日</span>
+                    <span className="font-medium">{formatValue(product.sameRepaymentDay)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">还款日规则</span>
+                    <span className="font-medium">{formatValue(product.repaymentDayRule)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">首期与末期是否同日</span>
+                    <span className="font-medium">{formatValue(product.firstLastSameDay)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">每期是否落月</span>
+                    <span className="font-medium">{formatValue(product.monthlyDue)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">自动扣款规则</span>
+                    <span className="font-medium">{formatValue(product.autoDeductRule)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">自动扣款标志</span>
+                    <span className="font-medium">{formatValue(product.autoDeductFlag)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">自动结清标志</span>
+                    <span className="font-medium">{formatValue(product.autoSettleFlag)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">多还款账户标志</span>
+                    <span className="font-medium">{formatValue(product.multiAccountFlag)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">允许提前还当日放款</span>
+                    <span className="font-medium">{formatValue(product.allowEarlyRepaymentSameDay)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">允许提前还款</span>
+                    <span className="font-medium">{formatValue(product.allowEarlyRepayment)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款规则</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentRule)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款期数</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentPeriods)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款可金额号</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentAmountCode)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款最低金额规则</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentMinRule)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款最低金额取值</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentMinAmount)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款最高金额规则</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentMaxRule)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">提前还款最高金额取值</span>
+                    <span className="font-medium">{formatValue(product.earlyRepaymentMaxAmount)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">是否有宽限期</span>
+                    <span className="font-medium">{formatValue(product.hasGracePeriod)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">本金宽限期天数</span>
+                    <span className="font-medium">{formatValue(product.principalGraceDays)}</span>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-sm text-gray-500">利息宽限期天数</span>
+                    <span className="font-medium">{formatValue(product.interestGraceDays)}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // 桌面端2列布局
+              <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">机构代码:</span>
+                      <span className="font-medium text-left">{formatValue(product.institutionCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">机构名称:</span>
+                      <span className="font-medium text-left">{formatValue(product.institutionName)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">分支机构:</span>
+                      <span className="font-medium text-left">{formatValue(product.branchInstitution)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">部件代码:</span>
+                      <span className="font-medium text-left">{formatValue(product.componentCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">部件名称:</span>
+                      <span className="font-medium text-left">{formatValue(product.componentName)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">货币代码:</span>
+                      <span className="font-medium text-left">{formatValue(product.currencyCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">还息周期:</span>
+                      <span className="font-medium text-left">{formatValue(product.interestCycle)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">还本周期:</span>
+                      <span className="font-medium text-left">{formatValue(product.principalCycle)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">按次还款周期:</span>
+                      <span className="font-medium text-left">{formatValue(product.perPaymentCycle)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">已成直达款顺序:</span>
+                      <span className="font-medium text-left">{formatValue(product.directPaymentOrder)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">还款顺序:</span>
+                      <span className="font-medium text-left">{formatValue(product.repaymentOrder)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">还款最小天数:</span>
+                      <span className="font-medium text-left">{formatValue(product.minRepaymentDays)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">最大还款日:</span>
+                      <span className="font-medium text-left">{formatValue(product.maxRepaymentDay)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">固定还款日:</span>
+                      <span className="font-medium text-left">{formatValue(product.fixedRepaymentDay)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">是否同一还款日:</span>
+                      <span className="font-medium text-left">{formatValue(product.sameRepaymentDay)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">还款日规则:</span>
+                      <span className="font-medium text-left">{formatValue(product.repaymentDayRule)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">首期与末期是否同日:</span>
+                      <span className="font-medium text-left">{formatValue(product.firstLastSameDay)}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">每期是否落月:</span>
+                      <span className="font-medium text-left">{formatValue(product.monthlyDue)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">自动扣款规则:</span>
+                      <span className="font-medium text-left">{formatValue(product.autoDeductRule)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">自动扣款标志:</span>
+                      <span className="font-medium text-left">{formatValue(product.autoDeductFlag)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">自动结清标志:</span>
+                      <span className="font-medium text-left">{formatValue(product.autoSettleFlag)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">多还款账户标志:</span>
+                      <span className="font-medium text-left">{formatValue(product.multiAccountFlag)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">允许提前还当日放款:</span>
+                      <span className="font-medium text-left">{formatValue(product.allowEarlyRepaymentSameDay)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">允许提前还款:</span>
+                      <span className="font-medium text-left">{formatValue(product.allowEarlyRepayment)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款规则:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentRule)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款期数:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentPeriods)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款可金额号:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentAmountCode)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款最低金额规则:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentMinRule)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款最低金额取值:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentMinAmount)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款最高金额规则:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentMaxRule)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">提前还款最高金额取值:</span>
+                      <span className="font-medium text-left">{formatValue(product.earlyRepaymentMaxAmount)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">是否有宽限期:</span>
+                      <span className="font-medium text-left">{formatValue(product.hasGracePeriod)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">本金宽限期天数:</span>
+                      <span className="font-medium text-left">{formatValue(product.principalGraceDays)}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-48 text-gray-500 flex-shrink-0">利息宽限期天数:</span>
+                      <span className="font-medium text-left">{formatValue(product.interestGraceDays)}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </TabsContent>
 
-        {/* 计算信息标签页 */}
+        {/* 计息信息标签页 */}
         <TabsContent value="calculation-info" className="mt-0">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="text-center text-gray-500 py-8">
-              计算信息功能开发中...
+          <div className="bg-white rounded-lg border border-gray-200">
+            {/* 页签导航放在内容区域顶部 */}
+            <TabsList className="w-full bg-white border-b border-gray-200 rounded-t-lg rounded-b-none p-1 justify-start">
+              <TabsTrigger
+                value="basic-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                基本信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="payment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                放款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="repayment-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                还款信息
+              </TabsTrigger>
+              <TabsTrigger
+                value="calculation-info"
+                className="data-[state=active]:bg-white data-[state=active]:text-blue-600"
+              >
+                计息信息
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="p-6">
+              <div className="text-center text-gray-500 py-8">
+                计息信息功能开发中...
+              </div>
             </div>
           </div>
         </TabsContent>
