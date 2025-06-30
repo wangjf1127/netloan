@@ -6,6 +6,9 @@ import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcru
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { AccountQuerySearch } from "./account-query-search"
 import { AccountQueryPagination } from "./account-query-pagination"
+import { LoanReceiptDetailDialog } from "./loan-receipt-detail-dialog"
+import { LoanTransactionDialog } from "./loan-transaction-dialog"
+import { InstallmentPaymentDialog } from "./installment-payment-dialog"
 import { useAccountQuery, useSearchAccountQuery } from "../hooks/use-account-query"
 import { maskSensitiveData } from "@/lib/utils"
 import { NotImplementedButton } from "@/shared/components/ui/feature-not-implemented"
@@ -16,6 +19,12 @@ export function AccountQueryList({ sidebarCollapsed, onToggleSidebar }: AccountQ
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize] = useState(10)
   const [searchParams, setSearchParams] = useState<AccountQuerySearchParams>({})
+  const [selectedReceiptId, setSelectedReceiptId] = useState<string>("")
+  const [showReceiptDetail, setShowReceiptDetail] = useState(false)
+  const [selectedAccountId, setSelectedAccountId] = useState<string>("")
+  const [showLoanTransaction, setShowLoanTransaction] = useState(false)
+  const [selectedInstallmentId, setSelectedInstallmentId] = useState<string>("")
+  const [showInstallmentPayment, setShowInstallmentPayment] = useState(false)
 
   const { data: accountQueries = [], isLoading, error } = useAccountQuery()
   const searchMutation = useSearchAccountQuery()
@@ -35,6 +44,24 @@ export function AccountQueryList({ sidebarCollapsed, onToggleSidebar }: AccountQ
     window.location.reload()
   }
 
+  // 处理查看借据详情
+  const handleViewReceiptDetail = (query: AccountQuery) => {
+    setSelectedReceiptId(query.id)
+    setShowReceiptDetail(true)
+  }
+
+  // 处理查看贷款流水
+  const handleViewLoanTransaction = (query: AccountQuery) => {
+    setSelectedAccountId(query.id)
+    setShowLoanTransaction(true)
+  }
+
+  // 处理查看期供
+  const handleViewInstallmentPayment = (query: AccountQuery) => {
+    setSelectedInstallmentId(query.id)
+    setShowInstallmentPayment(true)
+  }
+
   // 分页数据
   const startIndex = (currentPage - 1) * pageSize
   const endIndex = startIndex + pageSize
@@ -52,15 +79,15 @@ export function AccountQueryList({ sidebarCollapsed, onToggleSidebar }: AccountQ
           actions={[
             {
               label: '借据详情',
-              onClick: () => console.log('借据详情', query.id)
+              onClick: () => handleViewReceiptDetail(query)
             },
             {
               label: '贷款流水',
-              onClick: () => console.log('贷款流水', query.id)
+              onClick: () => handleViewLoanTransaction(query)
             },
             {
               label: '期供',
-              onClick: () => console.log('期供', query.id)
+              onClick: () => handleViewInstallmentPayment(query)
             },
             {
               label: '期供明细',
@@ -248,38 +275,25 @@ export function AccountQueryList({ sidebarCollapsed, onToggleSidebar }: AccountQ
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 sticky right-0 bg-white z-10 relative">
                       <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-transparent via-gray-300/25 to-white pointer-events-none -ml-4"></div>
                       <div className="flex space-x-2">
-                        <NotImplementedButton
-                          featureName="借据详情"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                        <button
+                          onClick={() => handleViewReceiptDetail(query)}
+                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto text-sm"
                         >
                           借据详情
-                        </NotImplementedButton>
-                        <NotImplementedButton
-                          featureName="贷款流水"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                        </button>
+                        <button
+                          onClick={() => handleViewLoanTransaction(query)}
+                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto text-sm"
                         >
                           贷款流水
-                        </NotImplementedButton>
-                        <NotImplementedButton
-                          featureName="期供"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
+                        </button>
+                        <button
+                          onClick={() => handleViewInstallmentPayment(query)}
+                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto text-sm"
                         >
                           期供
-                        </NotImplementedButton>
-                        <NotImplementedButton
-                          featureName="期供明细"
-                          variant="ghost"
-                          size="sm"
-                          className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
-                        >
-                          期供明细
-                        </NotImplementedButton>
+                        </button>
+                        
                       </div>
                     </td>
                   </tr>
@@ -299,6 +313,27 @@ export function AccountQueryList({ sidebarCollapsed, onToggleSidebar }: AccountQ
           />
         )}
       </div>
+
+      {/* 借据详情弹窗 */}
+      <LoanReceiptDetailDialog
+        open={showReceiptDetail}
+        onOpenChange={setShowReceiptDetail}
+        receiptId={selectedReceiptId}
+      />
+
+      {/* 贷款流水弹窗 */}
+      <LoanTransactionDialog
+        open={showLoanTransaction}
+        onOpenChange={setShowLoanTransaction}
+        accountId={selectedAccountId}
+      />
+
+      {/* 期供弹窗 */}
+      <InstallmentPaymentDialog
+        open={showInstallmentPayment}
+        onOpenChange={setShowInstallmentPayment}
+        accountId={selectedInstallmentId}
+      />
     </div>
   )
 }
