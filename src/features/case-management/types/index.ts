@@ -19,6 +19,8 @@ export interface MenuItem {
   path: string
   children?: MenuItem[]
   badge?: number
+  /** 功能是否已实现，默认为false */
+  implemented?: boolean
 }
 
 export interface CaseListProps {

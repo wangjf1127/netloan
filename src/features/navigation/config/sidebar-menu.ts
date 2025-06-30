@@ -56,18 +56,21 @@ export const sidebarMenuItems: MenuItem[] = [
     label: "客户管理",
     icon: "Users",
     path: "/customers",
+    implemented: true, // 已实现
   },
   {
     id: "case-management",
     label: "案件管理",
     icon: "FileText",
     path: "/cases",
+    implemented: true, // 已实现
     children: [
       {
         id: "case-list",
         label: "案件列表",
         icon: "List",
         path: "/", // 指向首页，与案件列表相同
+        implemented: true, // 已实现
       },
     ],
   },
@@ -116,12 +119,14 @@ export const sidebarMenuItems: MenuItem[] = [
     label: "额度管理",
     icon: "CreditCard",
     path: "/credit-management",
+    implemented: true, // 已实现
     children: [
       {
         id: "credit-ledger",
         label: "额度台账",
         icon: "FileSpreadsheet",
         path: "/credit-management/ledger",
+        implemented: true, // 已实现
       },
     ],
   },
@@ -130,30 +135,35 @@ export const sidebarMenuItems: MenuItem[] = [
     label: "业务查询",
     icon: "Search",
     path: "/business-query",
+    implemented: true, // 已实现
     children: [
       {
         id: "credit-application",
         label: "授信申请",
         icon: "FileText",
         path: "/business-query/credit-application",
+        implemented: true, // 已实现
       },
       {
         id: "credit-agreement",
         label: "授信协议",
         icon: "FileCheck",
         path: "/business-query/credit-agreement",
+        implemented: true, // 已实现
       },
       {
         id: "loan-contract",
         label: "贷款合同",
         icon: "FileSignature",
         path: "/business-query/loan-contract",
+        implemented: true, // 已实现
       },
       {
         id: "credit-withdrawal",
         label: "额度提现",
         icon: "CreditCard",
         path: "/business-query/credit-withdrawal",
+        implemented: true, // 已实现
       },
     ],
   },
@@ -162,12 +172,14 @@ export const sidebarMenuItems: MenuItem[] = [
     label: "产品管理",
     icon: "Package",
     path: "/product-management",
+    implemented: true, // 已实现
     children: [
       {
         id: "product-query",
         label: "产品查询",
         icon: "Search",
         path: "/product-management/product-query",
+        implemented: true, // 已实现
       },
     ],
   },

@@ -9,6 +9,7 @@ import { useCustomerDetail } from "../hooks/use-customer-detail"
 import { CustomerDetailSkeleton } from "./customer-detail-skeleton"
 import type { CustomerDetailProps } from "../types"
 import { maskSensitiveData } from "@/lib/utils"
+import { FeatureNotImplemented } from "@/shared/components/ui/feature-not-implemented"
 
 export function CustomerDetail({ customerId }: CustomerDetailProps) {
   const [isInitialLoading, setIsInitialLoading] = useState(true)
@@ -294,26 +295,42 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
         </TabsContent>
 
         <TabsContent value="other-info" className="mt-4">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center text-gray-500">
-            其它证件信息暂未开发
+          <div className="bg-white p-8 rounded-lg border border-gray-200">
+            <FeatureNotImplemented
+              featureName="其它证件信息"
+              showAsDialog={false}
+              showAsInline={true}
+            />
           </div>
         </TabsContent>
 
         <TabsContent value="house-info" className="mt-4">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center text-gray-500">
-            房产信息暂未开发
+          <div className="bg-white p-8 rounded-lg border border-gray-200">
+            <FeatureNotImplemented
+              featureName="房产信息"
+              showAsDialog={false}
+              showAsInline={true}
+            />
           </div>
         </TabsContent>
 
         <TabsContent value="car-info" className="mt-4">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center text-gray-500">
-            车位信息暂未开发
+          <div className="bg-white p-8 rounded-lg border border-gray-200">
+            <FeatureNotImplemented
+              featureName="车位信息"
+              showAsDialog={false}
+              showAsInline={true}
+            />
           </div>
         </TabsContent>
 
         <TabsContent value="family-info" className="mt-4">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center text-gray-500">
-            家庭资产信息暂未开发
+          <div className="bg-white p-8 rounded-lg border border-gray-200">
+            <FeatureNotImplemented
+              featureName="家庭资产信息"
+              showAsDialog={false}
+              showAsInline={true}
+            />
           </div>
         </TabsContent>
 
@@ -358,8 +375,12 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
         </TabsContent>
 
         <TabsContent value="contact-info" className="mt-4">
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center text-gray-500">
-            联系人信息暂未开发
+          <div className="bg-white p-8 rounded-lg border border-gray-200">
+            <FeatureNotImplemented
+              featureName="联系人信息"
+              showAsDialog={false}
+              showAsInline={true}
+            />
           </div>
         </TabsContent>
       </Tabs>

@@ -22,6 +22,7 @@ import { ResponsiveTable } from "@/shared/components/ui/responsive-table"
 import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 import { useIsMobile } from "../../../../components/ui/use-mobile"
 import { maskSensitiveData } from "@/lib/utils"
+import { NotImplementedButton } from "@/shared/components/ui/feature-not-implemented"
 
 export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLedgerListProps) {
   const [institution, setInstitution] = useState("all")
@@ -666,22 +667,24 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                             查看
                           </Button>
                         </Link>
-                        <Button
+                        <NotImplementedButton
+                          featureName="开具结清证明"
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
                         >
                           <FileText className="h-3 w-3 mr-1" />
                           开具结清证明
-                        </Button>
-                        <Button
+                        </NotImplementedButton>
+                        <NotImplementedButton
+                          featureName="下载结清证明"
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
                         >
                           <Download className="h-3 w-3 mr-1" />
                           下载结清证明
-                        </Button>
+                        </NotImplementedButton>
                       </div>
                     </td>
                   </tr>

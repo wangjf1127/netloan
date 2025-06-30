@@ -10,6 +10,7 @@ import type { CustomerListProps } from "../types"
 import { useCustomers, useSearchCustomers } from "../hooks/use-customers"
 import { CustomerListSkeleton } from "./customer-list-skeleton"
 import { maskSensitiveData } from "@/lib/utils"
+import { NotImplementedButton } from "@/shared/components/ui/feature-not-implemented"
 
 export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerListProps) {
   const [customerId, setCustomerId] = useState("")
@@ -198,22 +199,24 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
 
         <div className="flex justify-between items-center">
           <div className="flex space-x-2">
-            <Button
+            <NotImplementedButton
+              featureName="模板下载"
               variant="outline"
               size="sm"
               className="flex items-center h-8"
             >
               <Download className="h-3.5 w-3.5 mr-1" />
               模板下载
-            </Button>
-            <Button
+            </NotImplementedButton>
+            <NotImplementedButton
+              featureName="导入文件"
               variant="outline"
               size="sm"
               className="flex items-center h-8"
             >
               <FileText className="h-3.5 w-3.5 mr-1" />
               导入文件
-            </Button>
+            </NotImplementedButton>
           </div>
         </div>
       </div>
@@ -310,20 +313,22 @@ export function CustomerList({ sidebarCollapsed, onToggleSidebar }: CustomerList
                             还款计划
                           </Button>
                         </Link>
-                        <Button
+                        <NotImplementedButton
+                          featureName="用户信息更新"
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
                         >
                           用户信息更新
-                        </Button>
-                        <Button
+                        </NotImplementedButton>
+                        <NotImplementedButton
+                          featureName="客户注销"
                           variant="ghost"
                           size="sm"
                           className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
                         >
                           客户注销
-                        </Button>
+                        </NotImplementedButton>
                       </div>
                     </td>
                   </tr>

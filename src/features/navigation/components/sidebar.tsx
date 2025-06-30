@@ -8,6 +8,7 @@ import { Button } from "@/shared/components/ui/button"
 import { ChevronDown, ChevronRight, X } from "lucide-react"
 import * as Icons from "lucide-react"
 import type { MenuItem } from "@/features/case-management/types"
+import { WithFeatureNotImplemented } from "@/shared/components/ui/feature-not-implemented"
 
 interface SidebarProps {
   items: MenuItem[]
@@ -60,7 +61,7 @@ function SidebarContent({ items, className, collapsed = false, onClose }: Sideba
                 </>
               )}
             </Button>
-          ) : (
+          ) : item.implemented !== false ? (
             <Link href={item.path} className="w-full">
               <Button
                 variant="ghost"
@@ -82,6 +83,29 @@ function SidebarContent({ items, className, collapsed = false, onClose }: Sideba
                 )}
               </Button>
             </Link>
+          ) : (
+            <WithFeatureNotImplemented featureName={item.label}>
+              <Button
+                variant="ghost"
+                className={cn(
+                  "w-full justify-start text-left font-bold h-10 text-gray-300 hover:bg-slate-700 hover:text-white",
+                  collapsed ? "px-2" : "px-4",
+                  level > 0 && !collapsed && "pl-8 text-sm",
+                  "opacity-75", // 未实现功能的视觉提示
+                )}
+              >
+                <IconComponent className={cn("h-4 w-4", collapsed ? "mx-auto" : "mr-3")} />
+                {!collapsed && (
+                  <>
+                    <span className="flex-1">{item.label}</span>
+                    {item.badge && (
+                      <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-0.5">{item.badge}</span>
+                    )}
+                    <span className="ml-2 text-xs text-orange-400">未完成</span>
+                  </>
+                )}
+              </Button>
+            </WithFeatureNotImplemented>
           )}
         </div>
 
