@@ -480,174 +480,358 @@ export function CreditApplicationList({ sidebarCollapsed, onToggleSidebar }: Cre
 
       {/* 授信申请信息弹窗 */}
       <Dialog open={isDetailDialogOpen} onOpenChange={setIsDetailDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className={`max-h-[90vh] overflow-y-auto ${isMobile ? 'max-w-[95vw] w-[95vw]' : 'max-w-4xl'}`}>
           <DialogHeader>
             <DialogTitle className="text-lg font-medium mb-4">授信申请信息</DialogTitle>
           </DialogHeader>
 
           {selectedApplication && (
             <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-x-8 gap-y-3 text-sm">
-                <div className="flex flex-col space-y-1">
-                  <span className="text-gray-500">申请流水号:</span>
-                  <span className="text-gray-900 font-medium">202506253671779267034808320</span>
-                </div>
+              {isMobile ? (
+                // 移动端优化布局
+                <div className="space-y-4">
+                  {/* 长字段 - 单行显示 */}
+                  <div className="space-y-3">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">申请流水号:</span>
+                      <span className="text-gray-900 font-medium text-sm break-all">202506253671779267034808320</span>
+                    </div>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">机构:</span>
-                  <span className="text-gray-900 font-medium">00000045</span>
-                </div>
+                  {/* 短字段 - 双列布局 */}
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">机构:</span>
+                      <span className="text-gray-900 font-medium">00000045</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">客户号:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.customerId}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">客户号:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.customerId}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">客户名称:</span>
-                  <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.customerName, 'name')}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">客户名称:</span>
+                      <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.customerName, 'name')}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">产品号:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.productNumber}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">产品号:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.productNumber}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">贷款类型:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.loanType}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">贷款类型:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.loanType}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">贷款子类型:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.loanSubType}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">贷款子类型:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.loanSubType}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">证件类型:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.certificateType}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">证件类型:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.certificateType}</span>
+                    </div>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">证件号码:</span>
-                  <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.certificateNumber, 'idCard')}</span>
-                </div>
+                  {/* 中等长度字段 - 单行显示 */}
+                  <div className="space-y-3">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">证件号码:</span>
+                      <span className="text-gray-900 font-medium text-sm">{maskSensitiveData(selectedApplication.certificateNumber, 'idCard')}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">币种:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.currency}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">业务渠道:</span>
+                      <span className="text-gray-900 font-medium text-sm">{selectedApplication.businessChannel}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">业务渠道:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.businessChannel}</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">子业务渠道:</span>
+                      <span className="text-gray-900 font-medium text-sm">{selectedApplication.subBusinessChannel || '-'}</span>
+                    </div>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">子业务渠道:</span>
-                  <span className="text-gray-900 font-medium">{selectedApplication.subBusinessChannel || '-'}</span>
-                </div>
+                  {/* 其他短字段 - 双列布局 */}
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">币种:</span>
+                      <span className="text-gray-900 font-medium">{selectedApplication.currency}</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人邮箱地址:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人学历:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">销售员姓名:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">销售员姓名:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">销售员手机:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">销售员手机:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人所在省:</span>
-                  <span className="text-gray-900 font-medium">310000</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人所在省:</span>
+                      <span className="text-gray-900 font-medium">310000</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人所在市:</span>
-                  <span className="text-gray-900 font-medium">310000</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人所在市:</span>
+                      <span className="text-gray-900 font-medium">310000</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人所在区县:</span>
-                  <span className="text-gray-900 font-medium">310115</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人所在区县:</span>
+                      <span className="text-gray-900 font-medium">310115</span>
+                    </div>
 
-                <div className="flex flex-col space-y-1">
-                  <span className="text-gray-500">申请人所在详细地址:</span>
-                  <span className="text-gray-900 font-medium">上海市普陀区江桥路***弄*号</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">公司所在市:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人学历:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">公司所在区县:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex flex-col space-y-1">
-                  <span className="text-gray-500">申请人公司名称:</span>
-                  <span className="text-gray-900 font-medium">新希望金融科技有限公司</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人行职业:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人公司所在省:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                  {/* 长字段 - 单行显示 */}
+                  <div className="space-y-3">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">申请人邮箱地址:</span>
+                      <span className="text-gray-900 font-medium text-sm break-all">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">公司所在市:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">申请人所在详细地址:</span>
+                      <span className="text-gray-900 font-medium text-sm">上海市普陀区江桥路***弄*号</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">公司所在区县:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">申请人公司名称:</span>
+                      <span className="text-gray-900 font-medium text-sm">新希望金融科技有限公司</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">公司详细地址:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500 text-sm">公司详细地址:</span>
+                      <span className="text-gray-900 font-medium text-sm">-</span>
+                    </div>
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">申请人行职业:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                  {/* 联系人信息 - 双列布局 */}
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">申请人公司所在省:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人1关系:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人1关系:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人1姓名:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人1姓名:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人1手机号:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人1手机号:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人2关系:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人2关系:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人2姓名:</span>
-                  <span className="text-gray-900 font-medium">-</span>
-                </div>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人2姓名:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">联系人2手机号:</span>
-                  <span className="text-gray-900 font-medium">-</span>
+                    <div className="flex flex-col space-y-1">
+                      <span className="text-gray-500">联系人2手机号:</span>
+                      <span className="text-gray-900 font-medium">-</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                // 桌面端保持原有三列布局
+                <div className="grid grid-cols-3 gap-x-8 gap-y-3 text-sm">
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-gray-500">申请流水号:</span>
+                    <span className="text-gray-900 font-medium">202506253671779267034808320</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">机构:</span>
+                    <span className="text-gray-900 font-medium">00000045</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">客户号:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.customerId}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">客户名称:</span>
+                    <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.customerName, 'name')}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">产品号:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.productNumber}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">贷款类型:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.loanType}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">贷款子类型:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.loanSubType}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">证件类型:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.certificateType}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">证件号码:</span>
+                    <span className="text-gray-900 font-medium">{maskSensitiveData(selectedApplication.certificateNumber, 'idCard')}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">币种:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.currency}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">业务渠道:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.businessChannel}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">子业务渠道:</span>
+                    <span className="text-gray-900 font-medium">{selectedApplication.subBusinessChannel || '-'}</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人邮箱地址:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">销售员姓名:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">销售员手机:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人所在省:</span>
+                    <span className="text-gray-900 font-medium">310000</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人所在市:</span>
+                    <span className="text-gray-900 font-medium">310000</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人所在区县:</span>
+                    <span className="text-gray-900 font-medium">310115</span>
+                  </div>
+
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-gray-500">申请人所在详细地址:</span>
+                    <span className="text-gray-900 font-medium">上海市普陀区江桥路***弄*号</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人学历:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex flex-col space-y-1">
+                    <span className="text-gray-500">申请人公司名称:</span>
+                    <span className="text-gray-900 font-medium">新希望金融科技有限公司</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人公司所在省:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">公司所在市:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">公司所在区县:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">公司详细地址:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">申请人行职业:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人1关系:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人1姓名:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人1手机号:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人2关系:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人2姓名:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">联系人2手机号:</span>
+                    <span className="text-gray-900 font-medium">-</span>
+                  </div>
+                </div>
+              )}
 
               <div className="flex justify-center pt-4">
                 <Button

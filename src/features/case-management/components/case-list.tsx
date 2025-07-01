@@ -4,6 +4,9 @@ import { Input } from "@/shared/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select"
 import { Search, RotateCcw, Edit, Menu } from "lucide-react"
 import Link from "next/link"
+import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { ResponsiveBreadcrumb } from "@/shared/components/ui/responsive-breadcrumb"
+import { MobileActionMenu } from "@/shared/components/ui/mobile-action-menu"
 
 interface CaseListProps {
   sidebarCollapsed?: boolean
@@ -11,38 +14,127 @@ interface CaseListProps {
 }
 
 export function CaseList({ sidebarCollapsed, onToggleSidebar }: CaseListProps) {
-  return (
-    <div className="space-y-6">
-      {/* 面包屑导航 */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8"
-            onClick={onToggleSidebar}
+  const isMobile = useIsMobile()
+
+  // 案件数据
+  const cases = [
+    {
+      id: "1008000025559011358567353471115564",
+      customerName: "张三",
+      type: "提现",
+      customerId: "204955",
+      product: "产品消费车贷-消费贷",
+      businessProduct: "个人消费车贷的案例数据",
+      idCard: "110**********0076",
+      phone: "137****4931",
+      applyTime: "2025-06-25 10:06:17",
+      amount: "10000",
+      status: "决策通过"
+    },
+    {
+      id: "1008000025559011358567353471115563",
+      customerName: "张三",
+      type: "提现",
+      customerId: "204955",
+      product: "产品消费车贷-消费贷",
+      businessProduct: "个人消费车贷的案例数据",
+      idCard: "110**********0076",
+      phone: "137****4931",
+      applyTime: "2025-06-24 10:06:17",
+      amount: "10000",
+      status: "决策通过"
+    },
+    {
+      id: "1008000025559011358567353471115562",
+      customerName: "张三",
+      type: "授信",
+      customerId: "204955",
+      product: "产品消费车贷-消费贷",
+      businessProduct: "个人消费车贷的案例数据",
+      idCard: "110**********0076",
+      phone: "137****4931",
+      applyTime: "2025-06-23 10:06:17",
+      amount: "20000",
+      status: "决策通过"
+    }
+  ]
+
+  // 移动端案件卡片渲染函数
+  const renderMobileCaseCard = (caseItem: any) => (
+    <div className="space-y-3">
+      <div className="flex justify-between items-start">
+        <div className="space-y-1 flex-1">
+          <Link
+            href={`/case/${caseItem.id}`}
+            className="text-blue-600 font-mono text-sm font-bold hover:text-blue-800 hover:underline block truncate"
           >
-            <Menu className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <span>首页</span>
-            <span>/</span>
-            <span>案件管理</span>
-            <span>/</span>
-            <span className="text-gray-900">案件列表</span>
+            {caseItem.id}
+          </Link>
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-900 font-medium">{caseItem.customerName}</span>
+            <span className={`px-2 py-1 rounded text-xs ${
+              caseItem.type === '提现' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+            }`}>
+              {caseItem.type}
+            </span>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm">管</span>
-          </div>
-          <span className="text-sm text-gray-700">管理员</span>
+        <MobileActionMenu
+          actions={[
+            {
+              label: '查看详情',
+              onClick: () => window.location.href = `/case/${caseItem.id}`
+            }
+          ]}
+        />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 text-sm">
+        <div className="space-y-1">
+          <div className="text-gray-500">客户ID</div>
+          <div className="font-medium">{caseItem.customerId}</div>
+        </div>
+        <div className="space-y-1">
+          <div className="text-gray-500">身份证</div>
+          <div className="font-medium">{caseItem.idCard}</div>
+        </div>
+        <div className="space-y-1">
+          <div className="text-gray-500">手机号</div>
+          <div className="font-medium">{caseItem.phone}</div>
+        </div>
+        <div className="space-y-1">
+          <div className="text-gray-500">金额</div>
+          <div className="font-medium text-orange-500">{caseItem.amount}</div>
         </div>
       </div>
 
+      <div className="space-y-1 text-sm">
+        <div className="text-gray-500">申请时间</div>
+        <div className="text-gray-700">{caseItem.applyTime}</div>
+      </div>
+
+      <div className="flex justify-between items-center text-sm">
+        <div className="text-emerald-400 font-medium">状态: {caseItem.status}</div>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="space-y-6">
+      {/* 面包屑导航 */}
+      <ResponsiveBreadcrumb
+        items={[
+          { label: "首页", href: "/" },
+          { label: "案件管理" },
+          { label: "案件列表" }
+        ]}
+        onToggleSidebar={onToggleSidebar}
+        backLink="/"
+      />
+
       {/* 搜索表单 */}
       <div className="bg-white p-4 rounded-lg border border-gray-200">
-        <div className="grid grid-cols-5 gap-3 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-3">
           {/* 第一行 */}
           <div>
             <label className="block text-xs text-gray-700 mb-1">产品：</label>
@@ -103,7 +195,7 @@ export function CaseList({ sidebarCollapsed, onToggleSidebar }: CaseListProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
           {/* 第二行 */}
           <div>
             <label className="block text-xs text-gray-700 mb-1">客户姓名：</label>
@@ -123,7 +215,7 @@ export function CaseList({ sidebarCollapsed, onToggleSidebar }: CaseListProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
           {/* 第三行 */}
           <div>
             <label className="block text-xs text-gray-700 mb-1">授信金额（元）：</label>
@@ -166,94 +258,55 @@ export function CaseList({ sidebarCollapsed, onToggleSidebar }: CaseListProps) {
 
       {/* 搜索结果 */}
       <div className="bg-white rounded-lg border border-gray-200">
-        {/* 案件详情 */}
-        <div className="p-4">
-          <div className="mb-4">
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/case/1008000025559011358567353471115564"
-                className="text-blue-600 font-mono text-lg font-bold hover:text-blue-800 hover:underline"
-              >
-                1008000025559011358567353471115564
-              </Link>
-              <span className="text-gray-600">张三</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">提现</span>
-            </div>
+        {isMobile ? (
+          // 移动端卡片布局
+          <div className="p-4 space-y-4">
+            {cases.map((caseItem) => (
+              <div key={caseItem.id} className="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                {renderMobileCaseCard(caseItem)}
+              </div>
+            ))}
           </div>
+        ) : (
+          // 桌面端原有布局
+          <>
+            {cases.map((caseItem) => (
+              <div key={caseItem.id} className="p-4 border-b border-gray-100 last:border-b-0">
+                <div className="mb-4">
+                  <div className="flex items-center space-x-4">
+                    <Link
+                      href={`/case/${caseItem.id}`}
+                      className="text-blue-600 font-mono text-lg font-bold hover:text-blue-800 hover:underline"
+                    >
+                      {caseItem.id}
+                    </Link>
+                    <span className="text-gray-600">{caseItem.customerName}</span>
+                    <span className={`px-2 py-1 rounded text-sm ${
+                      caseItem.type === '提现' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+                    }`}>
+                      {caseItem.type}
+                    </span>
+                  </div>
+                </div>
 
-          <div className="grid grid-cols-1 gap-2 text-sm text-gray-600">
-            <div className="flex flex-wrap items-center space-x-6">
-              <span>客户ID: 204955</span>
-              <span>产品消费车贷-消费贷</span>
-              <span>业务产品: 个人消费车贷的案例数据</span>
-              <span>身份证: 110**********0076</span>
-              <span>手机号: 137****4931</span>
-            </div>
-            <div className="flex items-center space-x-6 mt-2">
-              <span className="text-gray-700">申请时间: 2025-06-25 10:06:17</span>
-              <span className="text-orange-500 font-medium">金额: 10000</span>
-              <span className="text-emerald-400">状态:决策通过</span>
-            </div>
-          </div>
-        </div>
-        <div className="p-4">
-          <div className="mb-4">
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/case/1008000025559011358567353471115563"
-                className="text-blue-600 font-mono text-lg font-bold hover:text-blue-800 hover:underline"
-              >
-                1008000025559011358567353471115563
-              </Link>
-              <span className="text-gray-600">张三</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">提现</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-2 text-sm text-gray-600">
-            <div className="flex flex-wrap items-center space-x-6">
-              <span>客户ID: 204955</span>
-              <span>产品消费车贷-消费贷</span>
-              <span>业务产品: 个人消费车贷的案例数据</span>
-              <span>身份证: 110**********0076</span>
-              <span>手机号: 137****4931</span>
-            </div>
-            <div className="flex items-center space-x-6 mt-2">
-              <span className="text-gray-700">申请时间: 2025-06-24 10:06:17</span>
-              <span className="text-orange-500 font-medium">金额: 10000</span>
-              <span className="text-emerald-400">状态:决策通过</span>
-            </div>
-          </div>
-        </div>
-        <div className="p-4">
-          <div className="mb-4">
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/case/1008000025559011358567353471115562"
-                className="text-blue-600 font-mono text-lg font-bold hover:text-blue-800 hover:underline"
-              >
-                1008000025559011358567353471115562
-              </Link>
-              <span className="text-gray-600">张三</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">授信</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-2 text-sm text-gray-600">
-            <div className="flex flex-wrap items-center space-x-6">
-              <span>客户ID: 204955</span>
-              <span>产品消费车贷-消费贷</span>
-              <span>业务产品: 个人消费车贷的案例数据</span>
-              <span>身份证: 110**********0076</span>
-              <span>手机号: 137****4931</span>
-            </div>
-            <div className="flex items-center space-x-6 mt-2">
-              <span className="text-gray-700">申请时间: 2025-06-23 10:06:17</span>
-              <span className="text-orange-500 font-medium">金额: 20000</span>
-              <span className="text-emerald-400">状态:决策通过</span>
-            </div>
-          </div>
-        </div>
+                <div className="grid grid-cols-1 gap-2 text-sm text-gray-600">
+                  <div className="flex flex-wrap items-center space-x-6">
+                    <span>客户ID: {caseItem.customerId}</span>
+                    <span>{caseItem.product}</span>
+                    <span>业务产品: {caseItem.businessProduct}</span>
+                    <span>身份证: {caseItem.idCard}</span>
+                    <span>手机号: {caseItem.phone}</span>
+                  </div>
+                  <div className="flex items-center space-x-6 mt-2">
+                    <span className="text-gray-700">申请时间: {caseItem.applyTime}</span>
+                    <span className="text-orange-500 font-medium">金额: {caseItem.amount}</span>
+                    <span className="text-emerald-400">状态: {caseItem.status}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   )

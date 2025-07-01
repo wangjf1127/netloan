@@ -10,12 +10,29 @@ import { CustomerDetailSkeleton } from "./customer-detail-skeleton"
 import type { CustomerDetailProps } from "../types"
 import { maskSensitiveData } from "@/lib/utils"
 import { FeatureNotImplemented } from "@/shared/components/ui/feature-not-implemented"
+import { useIsMobile } from "../../../../components/ui/use-mobile"
+import { MobileTabSelector } from "@/shared/components/ui/mobile-tab-selector"
 
 export function CustomerDetail({ customerId }: CustomerDetailProps) {
   const [isInitialLoading, setIsInitialLoading] = useState(true)
   const [activeTab, setActiveTab] = useState("basic-info")
-  
+  const isMobile = useIsMobile()
+
   const { data: customer, isLoading, error } = useCustomerDetail(customerId)
+
+  // 页签配置
+  const allTabs = [
+    { value: "basic-info", label: "基本信息", icon: "📋" },
+    { value: "other-info", label: "其它证件信息", icon: "📄" },
+    { value: "house-info", label: "房产信息", icon: "🏠" },
+    { value: "car-info", label: "车位信息", icon: "🚗" },
+    { value: "family-info", label: "家庭资产信息", icon: "👨‍👩‍👧‍👦" },
+    { value: "unit-info", label: "单位信息", icon: "🏢" },
+    { value: "contact-info", label: "联系人信息", icon: "📞" }
+  ]
+
+  // 移动端优先显示的页签
+  const primaryTabs = ["basic-info", "unit-info", "contact-info"]
 
   // 初始加载时显示骨架屏
   useEffect(() => {
@@ -123,50 +140,61 @@ export function CustomerDetail({ customerId }: CustomerDetailProps) {
 
       {/* 标签页导航 */}
       <Tabs defaultValue="basic-info" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="bg-white border-b border-gray-200 rounded-none p-0 flex justify-start">
-          <TabsTrigger 
-            value="basic-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            基本信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="other-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            其它证件信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="house-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            房产信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="car-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            车位信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="family-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            家庭资产信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="unit-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            单位信息
-          </TabsTrigger>
-          <TabsTrigger 
-            value="contact-info" 
-            className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
-          >
-            联系人信息
-          </TabsTrigger>
-        </TabsList>
+        {isMobile ? (
+          // 移动端使用底部弹窗选择器
+          <MobileTabSelector
+            tabs={allTabs}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            primaryTabs={primaryTabs}
+          />
+        ) : (
+          // 桌面端保持原有页签布局
+          <TabsList className="bg-white border-b border-gray-200 rounded-none p-0 flex justify-start">
+            <TabsTrigger
+              value="basic-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              基本信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="other-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              其它证件信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="house-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              房产信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="car-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              车位信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="family-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              家庭资产信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="unit-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              单位信息
+            </TabsTrigger>
+            <TabsTrigger
+              value="contact-info"
+              className="py-3 px-6 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 rounded-none"
+            >
+              联系人信息
+            </TabsTrigger>
+          </TabsList>
+        )}
 
         <TabsContent value="basic-info" className="mt-4">
           <div className="bg-white p-4 rounded-lg border border-gray-200 mb-4">
