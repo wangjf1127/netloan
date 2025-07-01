@@ -12,10 +12,10 @@ const nextConfig = {
   trailingSlash: true,
   
   // 如果部署到GitHub Pages或其他子目录，配置basePath
-  // basePath: '/your-repo-name',
-  
+  basePath: '/netloan',
+
   // 如果使用CDN，配置assetPrefix
-  // assetPrefix: 'https://your-cdn.com',
+  assetPrefix: '/netloan',
   
   // 优化静态导出
   experimental: {
