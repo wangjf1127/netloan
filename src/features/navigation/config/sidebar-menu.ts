@@ -11,13 +11,13 @@ export const sidebarMenuItems: MenuItem[] = [
         id: "pre-loan",
         label: "贷前管理",
         icon: "FileSearch",
-        path: "/risk-control/pre-loan",
         children: [
           {
             id: "credit-approval",
             label: "授信审批",
             icon: "CheckCircle",
             path: "/risk-control/pre-loan/credit-approval",
+            implemented: true, // 已实现
           },
         ],
       },
@@ -25,13 +25,13 @@ export const sidebarMenuItems: MenuItem[] = [
         id: "during-loan",
         label: "贷中管理",
         icon: "FileText",
-        path: "/risk-control/during-loan",
         children: [
           {
             id: "loan-approval",
             label: "贷款审批",
             icon: "FileCheck",
             path: "/risk-control/during-loan/loan-approval",
+            implemented: true, // 已实现
           },
         ],
       },
@@ -39,7 +39,6 @@ export const sidebarMenuItems: MenuItem[] = [
         id: "post-loan",
         label: "贷后管理",
         icon: "FileX",
-        path: "/risk-control/post-loan",
         children: [
           {
             id: "collection-management",

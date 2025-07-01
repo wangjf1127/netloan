@@ -52,12 +52,76 @@ export default function RouteTestPage() {
               <p className="text-sm text-red-700">动态路由测试</p>
             </Link>
             
-            <Link 
+            <Link
               href="/credit-management/ledger/456"
               className="block p-4 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors"
             >
               <h3 className="font-semibold text-indigo-900">额度详情</h3>
               <p className="text-sm text-indigo-700">嵌套路由测试</p>
+            </Link>
+
+            <Link
+              href="/risk-control/pre-loan/credit-approval"
+              className="block p-4 bg-yellow-50 border border-yellow-200 rounded-lg hover:bg-yellow-100 transition-colors"
+            >
+              <h3 className="font-semibold text-yellow-900">授信审批 ✅</h3>
+              <p className="text-sm text-yellow-700">风险掌控 - 贷前管理 (已修复布局)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/pre-loan/credit-approval/1"
+              className="block p-4 bg-teal-50 border border-teal-200 rounded-lg hover:bg-teal-100 transition-colors"
+            >
+              <h3 className="font-semibold text-teal-900">授信审批详情 ✅</h3>
+              <p className="text-sm text-teal-700">详情页面 - 决策通过 (绿色印章)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/pre-loan/credit-approval/2"
+              className="block p-4 bg-amber-50 border border-amber-200 rounded-lg hover:bg-amber-100 transition-colors"
+            >
+              <h3 className="font-semibold text-amber-900">人工审核详情 ✅</h3>
+              <p className="text-sm text-amber-700">详情页面 - 人工审核 (黄色印章)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/pre-loan/credit-approval/3"
+              className="block p-4 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 transition-colors"
+            >
+              <h3 className="font-semibold text-rose-900">决策拒绝详情 ✅</h3>
+              <p className="text-sm text-rose-700">详情页面 - 决策拒绝 (红色印章)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/during-loan/loan-approval"
+              className="block p-4 bg-purple-50 border border-purple-200 rounded-lg hover:bg-purple-100 transition-colors"
+            >
+              <h3 className="font-semibold text-purple-900">贷款审批 ✅</h3>
+              <p className="text-sm text-purple-700">贷中管理 - 贷款审批列表 (新开发)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/during-loan/loan-approval/1"
+              className="block p-4 bg-indigo-50 border border-indigo-200 rounded-lg hover:bg-indigo-100 transition-colors"
+            >
+              <h3 className="font-semibold text-indigo-900">贷款审批详情 ✅</h3>
+              <p className="text-sm text-indigo-700">贷中管理 - 贷款审批详情 (决策通过)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/during-loan/loan-approval/2"
+              className="block p-4 bg-yellow-50 border border-yellow-200 rounded-lg hover:bg-yellow-100 transition-colors"
+            >
+              <h3 className="font-semibold text-yellow-900">人工审核详情 ✅</h3>
+              <p className="text-sm text-yellow-700">贷中管理 - 贷款审批详情 (人工审核)</p>
+            </Link>
+
+            <Link
+              href="/risk-control/during-loan/loan-approval/3"
+              className="block p-4 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors"
+            >
+              <h3 className="font-semibold text-red-900">决策拒绝详情 ✅</h3>
+              <p className="text-sm text-red-700">贷中管理 - 贷款审批详情 (决策拒绝)</p>
             </Link>
           </div>
         </div>
