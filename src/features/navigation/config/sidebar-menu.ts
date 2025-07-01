@@ -11,6 +11,7 @@ export const sidebarMenuItems: MenuItem[] = [
         id: "pre-loan",
         label: "贷前管理",
         icon: "FileSearch",
+        path: "/risk-control/pre-loan",
         children: [
           {
             id: "credit-approval",
@@ -25,6 +26,7 @@ export const sidebarMenuItems: MenuItem[] = [
         id: "during-loan",
         label: "贷中管理",
         icon: "FileText",
+        path: "/risk-control/during-loan",
         children: [
           {
             id: "loan-approval",
@@ -35,19 +37,7 @@ export const sidebarMenuItems: MenuItem[] = [
           },
         ],
       },
-      {
-        id: "post-loan",
-        label: "贷后管理",
-        icon: "FileX",
-        children: [
-          {
-            id: "collection-management",
-            label: "催收管理",
-            icon: "Phone",
-            path: "/risk-control/post-loan/collection-management",
-          },
-        ],
-      },
+
     ],
   },
   {
