@@ -30,6 +30,7 @@ lint:
   only:
     - merge_requests
     - main
+    - master
     - develop
 
 # 构建测试
@@ -44,6 +45,7 @@ build_test:
   only:
     - merge_requests
     - main
+    - master
     - develop
 
 # 部署到Vercel预览环境（MR时触发）
@@ -88,6 +90,7 @@ deploy_production:
     url: https://netloan.vercel.app
   only:
     - main
+    - master
   when: on_success
 
 # 手动部署到生产环境
@@ -105,5 +108,6 @@ deploy_manual:
     url: https://netloan.vercel.app
   only:
     - main
+    - master
     - develop
   when: manual
