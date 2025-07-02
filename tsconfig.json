@@ -27,7 +27,7 @@
         "./src/*"
       ],
       "@/components/*": [
-        "./components/*"
+        "./src/components/*"
       ],
       "@/app/*": [
         "./src/app/*"
@@ -43,6 +43,9 @@
       ],
       "@/types/*": [
         "./src/types/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
       ]
     },
     "target": "ES2017"

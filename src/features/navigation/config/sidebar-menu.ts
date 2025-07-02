@@ -71,9 +71,10 @@ export const sidebarMenuItems: MenuItem[] = [
     children: [
       {
         id: "image-monitoring",
-        label: "影像监测查询",
+        label: "影像检测查询",
         icon: "Search",
         path: "/image-management/monitoring",
+        implemented: true, // 已实现
       },
     ],
   },

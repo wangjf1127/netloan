@@ -1,20 +1,10 @@
-"use client"
+import { MainLayout } from "@/features/layout/components/main-layout"
+import { ImageMonitoringList } from "@/features/image-management/components/image-monitoring-list"
 
-import { SimpleNotImplementedPage } from "@/shared/components/ui/not-implemented-page"
-
-interface ImageMonitoringPageProps {
-  sidebarCollapsed?: boolean
-  onToggleSidebar?: () => void
-}
-
-export default function ImageMonitoringPage({ sidebarCollapsed, onToggleSidebar }: ImageMonitoringPageProps) {
+export default function ImageMonitoringPage() {
   return (
-    <SimpleNotImplementedPage
-      featureName="影像监测查询"
-      parentPath="/image-management"
-      parentLabel="影像件管理"
-      sidebarCollapsed={sidebarCollapsed}
-      onToggleSidebar={onToggleSidebar}
-    />
+    <MainLayout>
+      <ImageMonitoringList />
+    </MainLayout>
   )
 }
