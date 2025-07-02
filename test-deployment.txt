@@ -1,0 +1,13 @@
+GitLab to Vercel Auto-Deployment Test
+=====================================
+
+Timestamp: 2025-01-02
+Purpose: Test automatic deployment from GitLab to Vercel
+
+Expected Flow:
+1. Push to GitLab main branch
+2. GitLab CI/CD triggers
+3. Vercel deployment starts
+4. Website updates automatically
+
+Status: Testing...
