@@ -1,18 +1,22 @@
 "use client"
 
-import { SimpleNotImplementedPage } from "@/shared/components/ui/not-implemented-page"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
-interface ImageManagementPageProps {
-  sidebarCollapsed?: boolean
-  onToggleSidebar?: () => void
-}
+export default function ImageManagementPage() {
+  const router = useRouter()
 
-export default function ImageManagementPage({ sidebarCollapsed, onToggleSidebar }: ImageManagementPageProps) {
+  useEffect(() => {
+    // 自动重定向到影像检测查询页面
+    router.replace("/image-management/monitoring")
+  }, [router])
+
   return (
-    <SimpleNotImplementedPage
-      featureName="影像件管理"
-      sidebarCollapsed={sidebarCollapsed}
-      onToggleSidebar={onToggleSidebar}
-    />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">正在跳转到影像检测查询...</p>
+      </div>
+    </div>
   )
 }

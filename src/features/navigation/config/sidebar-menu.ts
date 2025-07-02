@@ -67,7 +67,8 @@ export const sidebarMenuItems: MenuItem[] = [
     id: "image-management",
     label: "影像件管理",
     icon: "Image",
-    path: "/image-management",
+    path: "/image-management/monitoring", // 直接指向子页面
+    implemented: true, // 已实现
     children: [
       {
         id: "image-monitoring",
