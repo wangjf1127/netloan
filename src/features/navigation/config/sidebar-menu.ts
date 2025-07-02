@@ -104,6 +104,16 @@ export const sidebarMenuItems: MenuItem[] = [
     label: "实名记录",
     icon: "UserCheck",
     path: "/identity-record",
+    implemented: true, // 已实现
+    children: [
+      {
+        id: "id-card-ocr",
+        label: "身份证OCR认证记录",
+        icon: "CreditCard",
+        path: "/identity-record/id-card-ocr",
+        implemented: true, // 已实现
+      },
+    ],
   },
   {
     id: "credit-management",

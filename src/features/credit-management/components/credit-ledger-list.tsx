@@ -237,16 +237,16 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                   link.click();
                 }
               },
-              {
-                label: '开具结清证明',
-                icon: <FileText className="h-3 w-3" />,
-                onClick: () => console.log('开具结清证明', item.id)
-              },
-              {
-                label: '下载结清证明',
-                icon: <Download className="h-3 w-3" />,
-                onClick: () => console.log('下载结清证明', item.id)
-              }
+              // {
+              //   label: '开具结清证明',
+              //   icon: <FileText className="h-3 w-3" />,
+              //   onClick: () => console.log('开具结清证明', item.id)
+              // },
+              // {
+              //   label: '下载结清证明',
+              //   icon: <Download className="h-3 w-3" />,
+              //   onClick: () => console.log('下载结清证明', item.id)
+              // }
             ]}
           />
         ) : (
@@ -262,7 +262,7 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                 查看
               </Button>
             </Link>
-            <Button
+            {/* <Button
               variant="ghost"
               size="sm"
               className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto"
@@ -277,7 +277,7 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
             >
               <Download className="h-3 w-3 mr-1" />
               下载结清证明
-            </Button>
+            </Button> */}
           </div>
         )
       )
@@ -303,16 +303,16 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                 link.click();
               }
             },
-            {
-              label: '开具结清证明',
-              icon: <FileText className="h-3 w-3" />,
-              onClick: () => console.log('开具结清证明', item.id)
-            },
-            {
-              label: '下载结清证明',
-              icon: <Download className="h-3 w-3" />,
-              onClick: () => console.log('下载结清证明', item.id)
-            }
+            // {
+            //   label: '开具结清证明',
+            //   icon: <FileText className="h-3 w-3" />,
+            //   onClick: () => console.log('开具结清证明', item.id)
+            // },
+            // {
+            //   label: '下载结清证明',
+            //   icon: <Download className="h-3 w-3" />,
+            //   onClick: () => console.log('下载结清证明', item.id)
+            // }
           ]}
         />
       </div>
@@ -667,7 +667,7 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                             查看
                           </Button>
                         </Link>
-                        <NotImplementedButton
+                        {/* <NotImplementedButton
                           featureName="开具结清证明"
                           variant="ghost"
                           size="sm"
@@ -684,7 +684,7 @@ export function CreditLedgerList({ sidebarCollapsed, onToggleSidebar }: CreditLe
                         >
                           <Download className="h-3 w-3 mr-1" />
                           下载结清证明
-                        </NotImplementedButton>
+                        </NotImplementedButton> */}
                       </div>
                     </td>
                   </tr>
