@@ -85,7 +85,7 @@ deploy_production:
     - echo "✅ 生产环境部署完成！"
   environment:
     name: production
-    url: https://your-project.vercel.app
+    url: https://netloan.vercel.app
   only:
     - main
   when: on_success
@@ -102,7 +102,7 @@ deploy_manual:
     - vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
   environment:
     name: production
-    url: https://your-project.vercel.app
+    url: https://netloan.vercel.app
   only:
     - main
     - develop
