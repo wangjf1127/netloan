@@ -223,4 +223,20 @@ export const sidebarMenuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    id: "process-definition",
+    label: "流程定义",
+    icon: "Workflow",
+    path: "/process-definition",
+    implemented: true, // 已实现
+    children: [
+      {
+        id: "exin-auto-loan-process",
+        label: "e鑫汽车消费贷流程",
+        icon: "Car",
+        path: "/process-definition/exin-auto-loan",
+        implemented: true, // 已实现
+      },
+    ],
+  },
 ]
